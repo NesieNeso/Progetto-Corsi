@@ -3,20 +3,27 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="\styles\Login.css">
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <body>
-	<div>
+	<div id = "Login">
 		<h1> Login </h1>
-		<form method="post" action="dettaglio"> 
-			<input type = "text"  placeholder="email"> </br>
+		<form method="post" action="redirector"> 
+			<input type = "text"  placeholder="Name"> </br>
 			<input type = "password" placeholder="Password"> </br>
 			
 			<input type = "submit" value="Login">
 		</form>
 		
-		<input id = "" type = "button" value="Registrati">
+		<input id = "bnt" type = "button" value="Registrati">
 	</div>
+	
+	<script type="text/javascript">
+    	document.getElementById("bnt").onclick = function () {
+        location.href = "www.yoursite.com";
+    };
+</script>
 </body>
 </html>
