@@ -10,12 +10,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ControllerHome {
-
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+
 	
 	@RequestMapping("/")
 	public String homepage() {
+		
 		return "home/Homepage";
 	}
 			
@@ -43,5 +44,6 @@ public class ControllerHome {
 	public String homeAdmin() {
 		return "Admin/HomeAdmin";
 	}
+
 	
 }
