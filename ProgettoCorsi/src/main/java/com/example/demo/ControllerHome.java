@@ -18,9 +18,7 @@ public class ControllerHome {
 	public String homepage() {
 		return "home/Homepage";
 	}
-	
-
-		
+			
 
 	//Decide che pagina visualizzare, se admin o user
 	@PostMapping("/redirector")
