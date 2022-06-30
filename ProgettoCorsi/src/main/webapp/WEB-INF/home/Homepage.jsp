@@ -10,8 +10,8 @@
 	<div>
 		<h1> Login </h1>
 		<form method="post" action="dettaglio"> 
-			<input type = "text" value = "email" placeholder="email"> </br>
-			<input type = "password" value = "password" placeholder="Password"> </br>
+			<input type = "text"  placeholder="email"> </br>
+			<input type = "password" placeholder="Password"> </br>
 			
 			<input type = "submit" value="Login">
 		</form>
