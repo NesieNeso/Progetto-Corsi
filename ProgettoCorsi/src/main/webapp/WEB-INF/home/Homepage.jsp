@@ -22,7 +22,7 @@
 	
 	<script type="text/javascript">
     	document.getElementById("bnt").onclick = function () {
-        location.href = "/login?registrazione=reg";
+        location.href = "./?registrazione=reg";
     };
 </script>
 </body>

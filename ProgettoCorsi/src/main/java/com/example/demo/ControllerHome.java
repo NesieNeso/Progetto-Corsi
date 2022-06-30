@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
@@ -10,14 +12,43 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ControllerHome {
+
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-
+	private boolean flagError = false;
 	
 	@RequestMapping("/")
-	public String homepage() {
+	public String homepage(HttpServletRequest request) {
+		String reg = request.getParameter("registrazione");
+		if(flagError) {
+			System.out.println("errore");
+			return "home/Homepage";
+		}else {
+			System.out.println("ok: " + reg);
+			if(reg == null) {
+				/*SIAMO IN LOGIN*/
+
+				System.out.println("Login");
+				return "home/Homepage";
+			}else {
+				/*SIAMO IN Registrazione*/
+				try {
+					
+					/**
+					 *  -> 
+					 * 
+					 */
+					
+					System.out.println("registrazione");
+					return "redirect:/HomeAdmin";
+				}catch (Exception e) {
+					flagError = true;
+					return "redirect: home/Homepage";
+				}
+			}
 		
-		return "home/Homepage";
+		}	
+		
 	}
 			
 
@@ -44,6 +75,7 @@ public class ControllerHome {
 	public String homeAdmin() {
 		return "Admin/HomeAdmin";
 	}
-
+	
+	
 	
 }
