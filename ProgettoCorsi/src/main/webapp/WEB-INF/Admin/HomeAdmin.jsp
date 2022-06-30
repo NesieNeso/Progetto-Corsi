@@ -4,9 +4,12 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Pagina Admin</title>
 </head>
 <body>
-
-</body>
+		<div>
+			<h1 style="font-family:verdana; color:blue;"> Pagina di controllo totale </h1>
+			
+		</div>
+		
 </html>

@@ -21,4 +21,9 @@ public class ControllerHome {
 		}
 	}
 	
+	@RequestMapping("/HomeAdmin")
+	public String homeAdmin() {
+		return "Admin/HomeAdmin";
+	}
+	
 }
