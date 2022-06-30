@@ -7,6 +7,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<div>
+		<h1> Login </h1>
+		<form method="post" action="dettaglio"> 
+			<input type = "text" value = "email" placeholder="email"> </br>
+			<input type = "password" value = "password" placeholder="Password"> </br>
+			
+			<input type = "submit" value="Login">
+		</form>
+		
+		<input id = "" type = "button" value="Registrati">
+	</div>
 </body>
 </html>
