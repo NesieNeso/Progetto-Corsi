@@ -76,6 +76,11 @@ public class ControllerHome {
 		return "Admin/HomeAdmin";
 	}
 	
+	@RequestMapping("/HomeUtenti")
+	public String homeUtenti() {
+		return "Utenti/HomeUtenti";
+	}
+	
 	
 	
 }
