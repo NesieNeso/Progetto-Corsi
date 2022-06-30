@@ -14,15 +14,19 @@ public class GestisciUtenti {
 		this.jdbcTemplate=jdbcTemplate;
 	}
 	
-	public int insert(String username, String nome, String cognome, String password, String email) {
-		String sql = "INSERT INTO utenti (username, nome, cognome, password, email) VALUES (?, ?, ?, ?, ?)";
-		int result = jdbcTemplate.update(sql, username, nome, cognome, password, email);
+	public int insert(String username, String password) {
+		String sql = "INSERT INTO utenti (username, password) VALUES (?, ?)";
+		int result = jdbcTemplate.update(sql, username, password);
 		return result;
 	}
 	
-	public List<String> getIdFromUserPassword(String username, String password) {
+	public List<String> getIdFromUserPassword(String email, String password) {
 		List<String> idList = new ArrayList<>();
-		idList.addAll(jdbcTemplate.queryForList("SELECT idUtente from utenti where username='" + username + "' and password='" + password+"'", String.class));
+		idList.addAll(jdbcTemplate.queryForList("SELECT idUtente from utenti where email='" + email + "' and password='" + password+"'", String.class));
+		if(idList.get(0).equals("0")) {
+			
+		}else
+			idList.addAll(jdbcTemplate.queryForList("SELECT tipo_ruolo from ruolo where idUtente = '"+idList.get(0) +"'", String.class));
 		return idList;		
 	}
 	

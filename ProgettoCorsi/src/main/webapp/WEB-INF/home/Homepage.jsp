@@ -11,8 +11,8 @@
 	<div id = "Login">
 		<h1> Login </h1>
 		<form method="post" action="redirector"> 
-			<input type = "text"  placeholder="Name"> </br>
-			<input type = "password" placeholder="Password"> </br>
+			<input name="email" type = "email"  placeholder="email"> </br>
+			<input name="password" type = "password" placeholder="Password"> </br>
 			
 			<input type = "submit" value="Login">
 		</form>

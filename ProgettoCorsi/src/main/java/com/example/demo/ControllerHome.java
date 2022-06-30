@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,10 @@ public class ControllerHome {
 	
 	@RequestMapping("/")
 	public String homepage(HttpServletRequest request) {
+		
+		String email, password;
+		
+		
 		String reg = request.getParameter("registrazione");
 		if(flagError) {
 			System.out.println("errore");
@@ -26,19 +32,13 @@ public class ControllerHome {
 		}else {
 			System.out.println("ok: " + reg);
 			if(reg == null) {
-				/*SIAMO IN LOGIN*/
 
+				
 				System.out.println("Login");
 				return "home/Homepage";
 			}else {
 				/*SIAMO IN Registrazione*/
 				try {
-					
-					/**
-					 *  -> 
-					 * 
-					 */
-					
 					System.out.println("registrazione");
 					return "redirect:/HomeAdmin";
 				}catch (Exception e) {
@@ -54,21 +54,21 @@ public class ControllerHome {
 
 	//Decide che pagina visualizzare, se admin o user
 	@PostMapping("/redirector")
-	public String redirector(@RequestParam("email") String email, @RequestParam("Password") String password, ModelMap modelmap) {
+	public String redirector(@RequestParam("email") String email, @RequestParam("password") String password, ModelMap modelmap) {
+		GestisciUtenti gu = new GestisciUtenti(jdbcTemplate);
 		modelmap.put("email", email);
 		modelmap.put("password", password);
-		
-		/*
-		 * int utenteID = GestisciUtenti.getIdFromUserPassword(email, password);
-		 * 
-		 */
-		
-		if(/*utenteID==0*/true) {
-			return "Admin/HomeAdmin";
+		List<String> tmp = gu.getIdFromUserPassword(email, password);
+		if(tmp.size() == 2) {
+			if(tmp.get(1).equals("user")) {
+				return "Utenti/HomeUtenti";
+			}
+			else {
+				return "Admin/HomeAdmin";
+			}
 		}
-		else {
-			return "Utenti/HomeUtenti";
-		}
+		return "/";
+	
 	}
 	
 	@RequestMapping("/HomeAdmin")
