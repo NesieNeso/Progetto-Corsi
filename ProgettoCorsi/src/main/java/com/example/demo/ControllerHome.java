@@ -1,44 +1,49 @@
 package com.example.demo;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ControllerHome {
 
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
+	
 	@RequestMapping("/")
 	public String homepage() {
 		return "home/Homepage";
 	}
 	
-	@PostMapping("/redirector")
-	public String redirector() {
-		
-		/**
-		 * prendo dati dal form
 
-		 *
-		 *
-		 * mi connetto al db e prendo id
-		 * 	1 -> ok
-		 *  2 -> o non esiste o la pss è sbagliata
-		 * 
-		 * int utenteID = GestisciUtenti.getIdFromUserPassword(... ... );
-		 * 
-		 * mi prendo il ruolo (user o admin)
-		 * 
-		 * 
-		 * chiamo la pagina dedicata
+		
+
+	//Decide che pagina visualizzare, se admin o user
+	@PostMapping("/redirector")
+	public String redirector(@RequestParam("email") String email, @RequestParam("Password") String password, ModelMap modelmap) {
+		modelmap.put("email", email);
+		modelmap.put("password", password);
+		
+		/*
+		 * int utenteID = GestisciUtenti.getIdFromUserPassword(email, password);
 		 * 
 		 */
 		
-		if(true) {
+		if(/*utenteID==0*/true) {
 			return "Admin/HomeAdmin";
 		}
 		else {
 			return "Utenti/HomeUtenti";
 		}
+	}
+	
+	@RequestMapping("/HomeAdmin")
+	public String homeAdmin() {
+		return "Admin/HomeAdmin";
 	}
 	
 }

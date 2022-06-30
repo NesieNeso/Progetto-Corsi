@@ -5,7 +5,7 @@
 <head>
 <link rel="stylesheet" href="\styles\Login.css">
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Pagina Homepage</title>
 </head>
 <body>
 	<div id = "Login">
