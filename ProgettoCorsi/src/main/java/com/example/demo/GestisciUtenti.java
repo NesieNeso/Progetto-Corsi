@@ -41,4 +41,37 @@ public class GestisciUtenti {
 		}
 	}
 	
+	public String getIscrizioneCorso(String email, String password) {
+		List<String> idList = new ArrayList<>();
+		List<String> idCorso = new ArrayList<>();
+		//recupero l'idUtente avendo email e password
+		idList.addAll(jdbcTemplate.queryForList("SELECT idUtente from utenti where email='" + email + "' and password='" + password+"'", String.class));
+		
+		if(idList.get(0).equals("0")) {
+			
+		}else
+			//se trovo un utente recupero gli id_corso a cui è iscritto l'utente considerato
+			idCorso.addAll(jdbcTemplate.queryForList("SELECT id_corso from iscritto where id_utente = '"+idList.get(0) +"'", String.class));
+		List<String> listCorsi = new ArrayList<>();
+		
+		//ciclo sugli id_corso per recuperare i nomi corrispondenti
+		for(String id_corso: idCorso) {
+				if(id_corso.equals("0")) {
+					
+				}else {
+					List<String> tmp = new ArrayList<>();
+					tmp.addAll(jdbcTemplate.queryForList("SELECT nome_corso from corsi where id_corso = '"+id_corso +"'", String.class));
+					listCorsi.add(tmp.get(0));
+					}
+			}
+			String corsi=String.join("<br>", listCorsi);
+			return corsi;
+	}
+	
+	public String getUsername(String email, String password) {
+		List<String> username = new ArrayList<>();
+		username.addAll(jdbcTemplate.queryForList("SELECT username from utenti where email='" + email + "' and password='" + password+"'", String.class));
+		return username.get(0);		
+	}
+	
 }

@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	Pagina 2 del corso di uncinetto <br>
+	<a href="/nextPage?corso=uncinetto&pagina=3">prossima pagina</a>     
+	<a href="/nextPage?corso=uncinetto&pagina=1">pagina precedente</a>
 </body>
 </html>

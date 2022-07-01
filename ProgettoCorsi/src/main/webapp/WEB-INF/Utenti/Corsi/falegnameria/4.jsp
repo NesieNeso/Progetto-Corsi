@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	Pagina 0 del corso di uncinetto <br>
-	<a href="/nextPage?corso=uncinetto&pagina=1">prossima pagina</a>
+	Pagina 4 del corso di falegnameria <br>
+	<a href="/nextPage?corso=falegnameria&pagina=3">pagina precedente</a>
 </body>
 </html>

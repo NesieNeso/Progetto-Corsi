@@ -94,7 +94,9 @@ public class ControllerHome {
 		GestisciUtenti gu = new GestisciUtenti(jdbcTemplate);
 		modelmap.put("email", email);
 		modelmap.put("password", password);
-		
+
+		modelmap.put("username", gu.getUsername(email, password));
+		modelmap.put("corsi", gu.getIscrizioneCorso(email, password));
 		
 		System.out.println( "you pushed button " + request.getParameter("bnt"));
 		HttpSession ses = request.getSession();
@@ -134,6 +136,7 @@ public class ControllerHome {
 			
 			gu.insert(email, password);
 			return "Utenti/HomeUtenti";
+
 		}
 	
 	}
