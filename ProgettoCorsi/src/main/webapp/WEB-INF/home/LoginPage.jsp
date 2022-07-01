@@ -11,19 +11,20 @@
 	<div id = "Login">
 		<h1> Login </h1>
 		<form method="post" action="redirector"> 
-			<input name="email" type = "email"  placeholder="email"> </br>
-			<input name="password" type = "password" placeholder="Password"> </br>
+			<input id = "email" name="email" type = "email"  placeholder="email"> <br>
+			<div> ${errorEmail} </div><br>
+			<input id = "pass" name="password" type = "password" placeholder="Password"> <br>
+			<div> ${errorPass} </div><br>
 			
-			<input type = "submit" value="Login">
+			<input id="log" name ="bnt" type = "submit" value="Login">
+			<input id= "reg" name ="bnt" type = "submit" value="Registrati">
+			<div id ="error"> ${errorLogin} </div>
 		</form>
 		
-		<input id = "bnt" type = "button" value="Registrati">
+		
 	</div>
 	
-	<script type="text/javascript">
-    	document.getElementById("bnt").onclick = function () {
-        location.href = "./?registrazione=reg";
-    };
-</script>
+	
+
 </body>
 </html>

@@ -21,6 +21,11 @@
 		<div style="color:black;text-align:center">
 			<input id = "bntIscr" type = "button" value="Iscriviti a un nuovo corso">
 		</div>
+		<script type="text/javascript">
+    		document.getElementById("bntIscr").onclick = function () {
+        	location.href = "./?registrazione=reg";
+    		};
+		</script>
 
 </body>
 </html>
