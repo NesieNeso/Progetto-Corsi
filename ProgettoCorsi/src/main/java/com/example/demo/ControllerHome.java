@@ -28,14 +28,14 @@ public class ControllerHome {
 		String reg = request.getParameter("registrazione");
 		if(flagError) {
 			System.out.println("errore");
-			return "home/Homepage";
+			return "home/LoginPage";
 		}else {
 			System.out.println("ok: " + reg);
 			if(reg == null) {
 
 				
 				System.out.println("Login");
-				return "home/Homepage";
+				return "home/LoginPage";
 			}else {
 				/*SIAMO IN Registrazione*/
 				try {
@@ -43,7 +43,7 @@ public class ControllerHome {
 					return "redirect:/HomeAdmin";
 				}catch (Exception e) {
 					flagError = true;
-					return "redirect: home/Homepage";
+					return "redirect: home/LoginPage";
 				}
 			}
 		
