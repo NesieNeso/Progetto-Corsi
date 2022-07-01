@@ -16,3 +16,5 @@ insert into corsi (nome_corso, numero_pagine, descrizione, autore) values ('fale
 
 insert into iscritto (id_corso, id_utente) values (1, 1);
 insert into iscritto (id_corso, id_utente, pagina_attuale) values (1, 2, 3);
+insert into iscritto (id_corso, id_utente) values (2, 2);
+insert into iscritto (id_corso, id_utente) values (2, 1);
