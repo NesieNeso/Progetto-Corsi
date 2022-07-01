@@ -92,11 +92,7 @@ public class ControllerHome {
 
 		
 		GestisciUtenti gu = new GestisciUtenti(jdbcTemplate);
-		modelmap.put("email", email);
-		modelmap.put("password", password);
 
-		modelmap.put("username", gu.getUsername(email, password));
-		modelmap.put("corsi", gu.getIscrizioneCorso(email, password));
 		
 		System.out.println( "you pushed button " + request.getParameter("bnt"));
 		HttpSession ses = request.getSession();
@@ -115,12 +111,20 @@ public class ControllerHome {
 			return "redirect:/";
 		}
 		
+		modelmap.put("email", email);
+		modelmap.put("password", password);
 
+		modelmap.put("username", gu.getUsername(email, password));
+		modelmap.put("corsi", gu.getIscrizioneCorso(email, password));
+		
 		if(bnt.equals("Login")) {
 			
 			/* Siamo in login*/
 			List<String> tmp = gu.getIdFromUserPassword(email, password);
 			if(tmp.size() == 2) {
+				
+				
+				
 				if(tmp.get(1).equals("user")) 
 					return "Utenti/HomeUtenti";
 				else 

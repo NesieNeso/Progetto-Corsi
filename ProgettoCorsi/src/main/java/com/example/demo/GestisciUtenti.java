@@ -69,23 +69,16 @@ public class GestisciUtenti {
 	}
 	
 	public void showAll() {
-
-		List<String> allList = new ArrayList<>();
-		allList.addAll(jdbcTemplate.queryForList("SELECT * from utenti", String.class));
-		for(String k : allList)
-			System.out.println(k);
-
 		List<String> allNamesList = new ArrayList<>();
 		allNamesList.addAll(jdbcTemplate.queryForList("SELECT nome from utenti", String.class));
 		List<String> allSurnamesList = new ArrayList<>();
 		allSurnamesList.addAll(jdbcTemplate.queryForList("SELECT cognome from utenti", String.class));
-
+		System.out.println("------------TUTTI GLI UTENTI----------------");
 		for(int i = 0; i<allNamesList.size(); i++) {
-			
 			System.out.print("nome: " + allNamesList.get(i) + " cognome: " + allSurnamesList.get(i));
 			System.out.println("");
-			
 		}
+		System.out.println("--------------------------------------------");
 	}
 	
 	public void showUsers() {
@@ -95,12 +88,13 @@ public class GestisciUtenti {
 		allNamesList.addAll(jdbcTemplate.queryForList(sqlNome, String.class));
 		List<String> allSurnamesList = new ArrayList<>();
 		allSurnamesList.addAll(jdbcTemplate.queryForList(sqlCognome, String.class));
-
+		System.out.println("------------SOLO GLI UTENTI----------------");
 		for(int i = 0; i<allNamesList.size(); i++) {
 			
 			System.out.print("nome: " + allNamesList.get(i) + " cognome: " + allSurnamesList.get(i));
 			System.out.println("");
 		}
+		System.out.println("--------------------------------------------");
 	}
 	
 	public void showAdmin() {
@@ -110,12 +104,13 @@ public class GestisciUtenti {
 		allNamesList.addAll(jdbcTemplate.queryForList(sqlNome, String.class));
 		List<String> allSurnamesList = new ArrayList<>();
 		allSurnamesList.addAll(jdbcTemplate.queryForList(sqlCognome, String.class));
-
+		System.out.println("------------TUTTI GLI ADMIN----------------");
 		for(int i = 0; i<allNamesList.size(); i++) {
 			
 			System.out.print("nome: " + allNamesList.get(i) + " cognome: " + allSurnamesList.get(i));
 			System.out.println("");
 		}
+		System.out.println("--------------------------------------------");
 
 	}
 	
