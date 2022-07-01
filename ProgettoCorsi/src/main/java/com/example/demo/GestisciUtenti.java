@@ -31,10 +31,14 @@ public class GestisciUtenti {
 	}
 	
 	public void showAll() {
-		List<String> allList = new ArrayList<>();
-		allList.addAll(jdbcTemplate.queryForList("SELECT * from utenti", String.class));
-		for(String k : allList)
-			System.out.println(k);
+		List<String> allNamesList = new ArrayList<>();
+		allNamesList.addAll(jdbcTemplate.queryForList("SELECT nome from utenti", String.class));
+		List<String> allSurnamesList = new ArrayList<>();
+		allSurnamesList.addAll(jdbcTemplate.queryForList("SELECT cognome from utenti", String.class));
+
+		for(int i = 0; i<allNamesList.size(); i++) {
+			
+		}
 	}
 	
 }
