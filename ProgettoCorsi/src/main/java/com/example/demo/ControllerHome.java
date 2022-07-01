@@ -52,7 +52,6 @@ public class ControllerHome {
 	
 	@RequestMapping("/")
 	public String homepage(HttpServletRequest request) {
-		GestisciUtenti gu = new GestisciUtenti(jdbcTemplate);
 
 		
 		HttpSession req = request.getSession();
@@ -68,7 +67,7 @@ public class ControllerHome {
 			/* Stiamo facendo il login o la registrazione*/
 			System.out.println("Login");
 			return "home/LoginPage";
-		
+
 		}	
 		
 	}

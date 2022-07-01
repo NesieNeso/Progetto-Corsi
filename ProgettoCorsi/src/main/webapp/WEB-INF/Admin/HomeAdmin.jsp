@@ -13,7 +13,7 @@
 			<input id = "1" type = "button" value="Mostra Tutti">
 			<input id = "2" type = "button" value="Mostra Users">
 			<input id = "3" type = "button" value="Mostra Admin">
-		</div>
+		</div> </br>
 		
 		<script type="text/javascript">
     	document.getElementById("1").onclick = function () {

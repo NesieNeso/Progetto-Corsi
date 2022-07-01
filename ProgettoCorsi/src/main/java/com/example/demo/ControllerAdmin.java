@@ -11,10 +11,12 @@ public class ControllerAdmin {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	@RequestMapping("/HomeAdmin/allUsers")
+	@RequestMapping("Admin/HomeAdmin/allUsers")
 	public String allUsers() {
 		GestisciUtenti g = new GestisciUtenti(jdbcTemplate);
-		return "/HomeAdmin";
+		//g.showAll();
+		System.out.println("ciao");
+		return "redirect:Admin/HomeAdmin";
 	}
 	
 	
