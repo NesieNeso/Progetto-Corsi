@@ -38,6 +38,8 @@ public class ControllerCorsi {
 		return "Utenti/Corsi/cucina/"+ i;
 	}
 	
+	
+	
 	//Calcola la prossima pagina, utilizzando i parametri corso e pagina
 	@RequestMapping("/nextPage")
 	public String nextPage(HttpServletRequest req) {
@@ -47,6 +49,7 @@ public class ControllerCorsi {
 		
 		/*
 		 * TODO: aggiorna ultima pagina visitata
+		 * usa session per prendere id e salvalo.
 		 */
 		
 		return risultato;
