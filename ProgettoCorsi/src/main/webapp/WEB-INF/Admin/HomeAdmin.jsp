@@ -9,23 +9,19 @@
 <body>
 		<div style="color:blue;text-align:center">
 			<h1 style="font-family:verdana; ;"> Pagina di controllo totale </h1> </br>
+			 
 			
-			<form action="/Admin/HomeAdmin/allUsers" method="post">
-				<input id = "1" type = "submit" value="Mostra Tutti">
+			<form action="/Admin/HomeAdmin/allUsers">
+				<input id = "1" type = "button" value="Mostra Tutti">
+			</form>
+			<form action="/Admin/HomeAdmin/onlyUsers">
+				<input id = "2" type = "button" value="Mostra Users">
+			</form>
+			<form action="/Admin/HomeAdmin/onlyAdmin">
+				<input id = "3" type = "button" value="Mostra Admin">
 			</form>
 			
-			<form action="/Admin/HomeAdmin/onlyUsers" method="post">
-				<input id = "2" type = "submit" value="Mostra Users">
-			</form>
 			
-			<form action="/Admin/HomeAdmin/onlyAdmin" method="post">
-				<input id = "3" type = "submit" value="Mostra Admin">
-			</form>
-			
-			
-			
-		</div> </br>
-		
-	
+		</div>
 		
 </html>

@@ -30,17 +30,6 @@ public class GestisciUtenti {
 		return idList;		
 	}
 	
-	public void showAll() {
-		List<String> allNamesList = new ArrayList<>();
-		allNamesList.addAll(jdbcTemplate.queryForList("SELECT nome from utenti", String.class));
-		List<String> allSurnamesList = new ArrayList<>();
-		allSurnamesList.addAll(jdbcTemplate.queryForList("SELECT cognome from utenti", String.class));
-
-		for(int i = 0; i<allNamesList.size(); i++) {
-			
-		}
-	}
-	
 	public String getIscrizioneCorso(String email, String password) {
 		List<String> idList = new ArrayList<>();
 		List<String> idCorso = new ArrayList<>();
@@ -72,6 +61,57 @@ public class GestisciUtenti {
 		List<String> username = new ArrayList<>();
 		username.addAll(jdbcTemplate.queryForList("SELECT username from utenti where email='" + email + "' and password='" + password+"'", String.class));
 		return username.get(0);		
+	}
+	
+	public void showAll() {
+
+		List<String> allList = new ArrayList<>();
+		allList.addAll(jdbcTemplate.queryForList("SELECT * from utenti", String.class));
+		for(String k : allList)
+			System.out.println(k);
+
+		List<String> allNamesList = new ArrayList<>();
+		allNamesList.addAll(jdbcTemplate.queryForList("SELECT nome from utenti", String.class));
+		List<String> allSurnamesList = new ArrayList<>();
+		allSurnamesList.addAll(jdbcTemplate.queryForList("SELECT cognome from utenti", String.class));
+
+		for(int i = 0; i<allNamesList.size(); i++) {
+			
+			System.out.print("nome: " + allNamesList.get(i) + " cognome: " + allSurnamesList.get(i));
+			System.out.println("");
+			
+		}
+	}
+	
+	public void showUsers() {
+		String sqlNome = "select nome from utenti u join ruolo r on u.idUtente = r.idUtente where tipo_ruolo like 'user';";
+		String sqlCognome = "select cognome from utenti u join ruolo r on u.idUtente = r.idUtente where tipo_ruolo like 'user';";
+		List<String> allNamesList = new ArrayList<>();
+		allNamesList.addAll(jdbcTemplate.queryForList(sqlNome, String.class));
+		List<String> allSurnamesList = new ArrayList<>();
+		allSurnamesList.addAll(jdbcTemplate.queryForList(sqlCognome, String.class));
+
+		for(int i = 0; i<allNamesList.size(); i++) {
+			
+			System.out.print("nome: " + allNamesList.get(i) + " cognome: " + allSurnamesList.get(i));
+			System.out.println("");
+		}
+	}
+	
+	public void showAdmin() {
+		String sqlNome = "select nome from utenti u join ruolo r on u.idUtente = r.idUtente where tipo_ruolo like 'admin';";
+		String sqlCognome = "select cognome from utenti u join ruolo r on u.idUtente = r.idUtente where tipo_ruolo like 'admin';";
+		List<String> allNamesList = new ArrayList<>();
+		allNamesList.addAll(jdbcTemplate.queryForList(sqlNome, String.class));
+		List<String> allSurnamesList = new ArrayList<>();
+		allSurnamesList.addAll(jdbcTemplate.queryForList(sqlCognome, String.class));
+
+		for(int i = 0; i<allNamesList.size(); i++) {
+			
+			System.out.print("nome: " + allNamesList.get(i) + " cognome: " + allSurnamesList.get(i));
+			System.out.println("");
+		}
+
 	}
 	
 }
