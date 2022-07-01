@@ -12,6 +12,7 @@
 		</div>
 		<div style="color:black;text-align:center">
 			<h1 style="font-family:verdana;font-size:20px ;"> Username: ${username} </h1> </br>
+			<h1 style="font-family:verdana;font-size:20px ;"> Email: ${email} </h1> </br>
 		</div>
 
 </body>
