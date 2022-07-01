@@ -1,5 +1,8 @@
 package com.example.demo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
@@ -12,7 +15,7 @@ public class ControllerAdmin {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-	@PostMapping("/HomeAdmin/allUsers")
+	@PostMapping("/Admin/HomeAdmin/allUsers")
 	public String allUsers() {
 		GestisciUtenti g = new GestisciUtenti(jdbcTemplate);
 		g.showAll();
