@@ -58,6 +58,8 @@ public class ControllerHome {
 		GestisciUtenti gu = new GestisciUtenti(jdbcTemplate);
 		modelmap.put("email", email);
 		modelmap.put("password", password);
+		modelmap.put("username", gu.getUsername(email, password));
+		modelmap.put("corsi", gu.getIscrizioneCorso(email, password));
 		List<String> tmp = gu.getIdFromUserPassword(email, password);
 		if(tmp.size() == 2) {
 			if(tmp.get(1).equals("user")) {
