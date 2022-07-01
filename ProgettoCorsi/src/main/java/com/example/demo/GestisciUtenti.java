@@ -15,7 +15,7 @@ public class GestisciUtenti {
 	}
 	
 	public int insert(String username, String password) {
-		String sql = "INSERT INTO utenti (username, password) VALUES (?, ?)";
+		String sql = "INSERT INTO utenti (email, password) VALUES (?, ?)";
 		int result = jdbcTemplate.update(sql, username, password);
 		return result;
 	}

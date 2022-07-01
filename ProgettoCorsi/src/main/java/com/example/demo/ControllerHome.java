@@ -40,7 +40,6 @@ public class ControllerHome {
 			e.printStackTrace();
 		}
 		
-		
 		return secret.toString();
 	}
 	
@@ -50,22 +49,35 @@ public class ControllerHome {
 	private JdbcTemplate jdbcTemplate;
 	private boolean flagError = false;
 	
+	private String bnt;
+	
 	@RequestMapping("/")
 	public String homepage(HttpServletRequest request) {
+		System.out.println("Benvenuto nella pagina iniziale");
+		HttpSession req = request.getSession();
+		req.setAttribute("errorLogin", "");
 
 		
-		HttpSession req = request.getSession();
 		
 		
 		if(flagError) {
 			/* GESTIONE DEGLI ERRORI */
-			req.setAttribute("errorLogin", "c'è stato un errore nel login");
+			System.out.println("-> errore;");
+			
+			flagError = false;
+			if(bnt.equals("Login")) {
+				req.setAttribute("errorLogin", "Password o Email errati");
+			}else
+				req.setAttribute("errorLogin", "c'è stato un errore nella registrazione");
+			
 			return "home/LoginPage";
 			
-			
 		}else {		
+			
+			req.setAttribute("errorEmail", "");
+			req.setAttribute("errorPass", "");
 			/* Stiamo facendo il login o la registrazione*/
-			System.out.println("Login");
+			System.out.println("-> Login o registrazione");
 			return "home/LoginPage";
 
 		}	
@@ -75,7 +87,7 @@ public class ControllerHome {
 
 	//Decide che pagina visualizzare, se admin o user
 	@PostMapping("/redirector")
-	public String redirector(HttpServletResponse response, HttpServletRequest request, @RequestParam("email") String email, @RequestParam("password") String password, ModelMap modelmap) {
+	public String redirector(HttpServletRequest request, @RequestParam("email") String email, @RequestParam("password") String password, ModelMap modelmap) {
 		
 
 		
@@ -85,29 +97,44 @@ public class ControllerHome {
 		
 		
 		System.out.println( "you pushed button " + request.getParameter("bnt"));
+		HttpSession ses = request.getSession();
+		bnt = request.getParameter("bnt");	
+		System.out.println(email + ", " + password + ": " + (email.length()<0 || password.length() < 0));
+		if(email.length()==0 || password.length() == 0) {
+			System.out.println(" -> -> errore");
+			flagError = true;
+			if(email.length()== 0 )
+				System.out.println(" -> -> errore Email");
+				ses.setAttribute("errorEmail", "non hai inserito un email");
+
+			if(password.length()== 0 )
+				ses.setAttribute("errorPass", "non hai inserito la password");
+
+			return "redirect:/";
+		}
 		
 
-		if(request.getParameter("bnt").equals("Login")) {
+		if(bnt.equals("Login")) {
+			
 			/* Siamo in login*/
 			List<String> tmp = gu.getIdFromUserPassword(email, password);
 			if(tmp.size() == 2) {
 				if(tmp.get(1).equals("user")) 
 					return "Utenti/HomeUtenti";
-				
 				else 
 					return "Admin/HomeAdmin";
 				
+			}else{
+				flagError = true;
+				return "home/LoginPage";
 			}
 		}else {
 			/* Siamo in Registrazione*/
-			System.out.println(email + ", " + password);
+			
 			
 			gu.insert(email, password);
 			return "Utenti/HomeUtenti";
 		}
-		
-
-		return "/";
 	
 	}
 	
