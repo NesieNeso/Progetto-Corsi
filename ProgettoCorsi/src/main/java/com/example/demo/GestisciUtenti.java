@@ -30,4 +30,11 @@ public class GestisciUtenti {
 		return idList;		
 	}
 	
+	public void showAll() {
+		List<String> allList = new ArrayList<>();
+		allList.addAll(jdbcTemplate.queryForList("SELECT * from utenti", String.class));
+		for(String k : allList)
+			System.out.println(k);
+	}
+	
 }

@@ -10,14 +10,14 @@
 		<div style="color:blue;text-align:center">
 			<h1 style="font-family:verdana; ;"> Pagina di controllo totale </h1> </br>
 			
-			<input id = "1" type = "button" value="Mostra Users">
-			<input id = "2" type = "button" value="Mostra Tutti">
+			<input id = "1" type = "button" value="Mostra Tutti">
+			<input id = "2" type = "button" value="Mostra Users">
 			<input id = "3" type = "button" value="Mostra Admin">
 		</div>
 		
 		<script type="text/javascript">
     	document.getElementById("1").onclick = function () {
-        
+    		location.href = "./Admin/HomeAdmin/allUsers";
     	};
     	</script>
     	<script type="text/javascript">
