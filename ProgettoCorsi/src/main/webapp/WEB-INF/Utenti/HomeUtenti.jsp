@@ -16,16 +16,11 @@
 			<h1 style="font-family:verdana;font-size:20px ;"> Corsi a cui sei iscritto: </h1>
 		</div>
 		<div style="color:black;text-align:center">
-			<h1 style="font-family:verdana;font-size:20px ;"> ${corsi} </h1> </br>
+  		<h1 style="font-family:verdana;font-size:20px ;"> ${corsi} </h1> </br>
 		</div>
 		<div style="color:black;text-align:center">
 			<input id = "bntIscr" type = "button" value="Iscriviti a un nuovo corso">
 		</div>
-		<script type="text/javascript">
-    		document.getElementById("bntIscr").onclick = function () {
-        	location.href = "./?registrazione=reg";
-    		};
-		</script>
 
 </body>
 </html>

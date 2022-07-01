@@ -53,7 +53,12 @@ public class GestisciUtenti {
 					listCorsi.add(tmp.get(0));
 					}
 			}
-			String corsi=String.join("<br>", listCorsi);
+			
+		String corsi="";
+		for(String c: listCorsi) {
+			corsi +="<a href=/nextpage?corso=" + c +  ">" + c + "</a><br>";}
+			
+			System.out.println(corsi);
 			return corsi;
 	}
 	
