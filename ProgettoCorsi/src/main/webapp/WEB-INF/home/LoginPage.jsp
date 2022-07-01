@@ -11,7 +11,8 @@
 	<div id = centrer>
 		<div id=centerCenter>
 			<div id = "Login">
-				<h1> Login </h1>
+				<h1> Ciao  </h1>
+				<h3> Corsi  Italiani Assolutamente Ottimi</h3>
 				<form method="post" action="redirector"> 
 					<input id = "email" name="email" type = "email"  placeholder="email"> <br>
 					<div class= "error"> ${errorEmail} </div><br>

@@ -94,10 +94,11 @@ public class ControllerHome {
 		GestisciUtenti gu = new GestisciUtenti(jdbcTemplate);
 
 		
-		System.out.println( "you pushed button " + request.getParameter("bnt"));
+
 		HttpSession ses = request.getSession();
 		bnt = request.getParameter("bnt");	
-		System.out.println(email + ", " + password + ": " + (email.length()<0 || password.length() < 0));
+
+
 		if(email.length()==0 || password.length() == 0) {
 			System.out.println(" -> -> errore");
 			flagError = true;
@@ -111,25 +112,19 @@ public class ControllerHome {
 			return "redirect:/";
 		}
 		
-		modelmap.put("email", email);
-		modelmap.put("password", password);
 
-		modelmap.put("username", gu.getUsername(email, password));
-		modelmap.put("corsi", gu.getIscrizioneCorso(email, password));
-		
 		if(bnt.equals("Login")) {
-			
+			modelmap.put("email", email);
+			modelmap.put("password", password);
+			modelmap.put("username", gu.getUsername(email, password));
+			modelmap.put("corsi", gu.getIscrizioneCorso(email, password));
 			/* Siamo in login*/
 			List<String> tmp = gu.getIdFromUserPassword(email, password);
-			if(tmp.size() == 2) {
-				
-				
-				
+			if(tmp.size() == 2) { 
 				if(tmp.get(1).equals("user")) 
 					return "Utenti/HomeUtenti";
 				else 
 					return "Admin/HomeAdmin";
-				
 			}else{
 				flagError = true;
 				return "home/LoginPage";
@@ -137,9 +132,21 @@ public class ControllerHome {
 		}else {
 			/* Siamo in Registrazione*/
 			
-			
-			gu.insert(email, password);
-			return "Utenti/HomeUtenti";
+			try {
+				
+				gu.insert(email, password);
+				
+				modelmap.put("email", email);
+				modelmap.put("password", password);
+				modelmap.put("username", gu.getUsername(email, password));
+				modelmap.put("corsi", gu.getIscrizioneCorso(email, password));
+				
+				return "Utenti/HomeUtenti";
+			}catch (Exception e) {
+				flagError = true;
+				return "redirect:/";
+			}
+
 
 		}
 	
