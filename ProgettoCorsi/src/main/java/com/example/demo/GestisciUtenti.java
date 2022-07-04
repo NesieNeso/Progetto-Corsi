@@ -89,5 +89,9 @@ public class GestisciUtenti {
 		return username.get(0);		
 	}
 	
+	public void inscrizioneCorso(){
+		
+	}
+	
 	
 }

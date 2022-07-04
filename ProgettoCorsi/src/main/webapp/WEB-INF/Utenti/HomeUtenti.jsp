@@ -22,7 +22,7 @@
 			<h1 style="font-family:verdana;font-size:20px ;"> Clicca per iscriverti ad un nuovo corso: </h1>
 		</div>
 		<div style="color:black;text-align:center">
-  			<h1 style="font-family:verdana;font-size:20px ;"> ${corsiNuovi} </h1> </br>
+			<h1 style="font-family:verdana;font-size:20px ;"> ${corsiNuovi} </h1> </br>
 		</div>
 
 </body>
