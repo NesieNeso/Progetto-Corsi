@@ -88,12 +88,8 @@ public class ControllerHome {
 	//Decide che pagina visualizzare, se admin o user
 	@PostMapping("/redirector")
 	public String redirector(HttpServletRequest request, @RequestParam("email") String email, @RequestParam("password") String password, ModelMap modelmap) {
-		
-
-		
+				
 		GestisciUtenti gu = new GestisciUtenti(jdbcTemplate);
-
-		
 
 		HttpSession ses = request.getSession();
 		bnt = request.getParameter("bnt");	
@@ -117,7 +113,7 @@ public class ControllerHome {
 			modelmap.put("email", email);
 			modelmap.put("password", password);
 			modelmap.put("username", gu.getUsername(email, password));
-			modelmap.put("corsi", gu.getIscrizioneCorso(email, password));
+			modelmap.put("corsi", gu.getLinkIscrizioneCorso(email, password));
 			/* Siamo in login*/
 			List<String> tmp = gu.getIdFromUserPassword(email, password);
 			if(tmp.size() == 2) { 

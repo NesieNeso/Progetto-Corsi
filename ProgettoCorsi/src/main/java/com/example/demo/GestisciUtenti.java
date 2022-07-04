@@ -30,7 +30,7 @@ public class GestisciUtenti {
 		return idList;		
 	}
 	
-	public String getIscrizioneCorso(String email, String password) {
+	public List<String> getIscrizioneCorso(String email, String password) {
 		List<String> idList = new ArrayList<>();
 		List<String> idCorso = new ArrayList<>();
 		//recupero l'idUtente avendo email e password
@@ -53,13 +53,18 @@ public class GestisciUtenti {
 					listCorsi.add(tmp.get(0));
 					}
 			}
-			
+		return listCorsi;
+
+	}
+	
+	public String getLinkIscrizioneCorso(String email, String password) {
+		List<String> listCorsi =getIscrizioneCorso(email, password);
 		String corsi="";
 		for(String c: listCorsi) {
-			corsi +="<a href=/nextpage?corso=" + c +  ">" + c + "</a><br>";}
-			
+			corsi +="<a href=\"Utenti/Corsi/" + c + "\">" + c + "</a><br>";}			
 			System.out.println(corsi);
 			return corsi;
+		
 	}
 	
 	public String getUsername(String email, String password) {
