@@ -93,7 +93,7 @@ public class GestisciUtenti {
 		List<String> listCorsi = listaNuoviCorsi(email, password);
 		String corsi="";
 		for(String c: listCorsi) {
-			corsi +="<a href=\"Utenti/Corsi/" + c + "\">" + c + "</a><br>";}			
+			corsi +="<a href=iscrizioneNuovoCorso?corso="+c+">" + c + "</a><br>";}		
 			System.out.println(corsi);
 			return corsi;	
 	}
@@ -102,7 +102,7 @@ public class GestisciUtenti {
 		List<String> listCorsi = getIscrizioneCorso(email, password);
 		String corsi="";
 		for(String c: listCorsi) {
-			corsi +="<a href=\"Utenti/Corsi/" + c + "\">" + c + "</a><br>";}			
+			corsi +="<a href=\"Utenti/Corsi/" + c + "\">" + c + "</a><br>";}
 			System.out.println(corsi);
 			return corsi;	
 
@@ -112,11 +112,6 @@ public class GestisciUtenti {
 		List<String> username = new ArrayList<>();
 		username.addAll(jdbcTemplate.queryForList("SELECT username from utenti where email='" + email + "' and password='" + password+"'", String.class));
 		return username.get(0);		
-	}
-	
-
-	public void inscrizioneCorso(){
-		
 	}
 	
 	
