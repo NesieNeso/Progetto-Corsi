@@ -54,7 +54,7 @@ public class GestisciUtenti {
 		return idList;		
 	}
 	
-	public String getIscrizioneCorso(String email, String password) {
+	public List<String> getIscrizioneCorso(String email, String password) {
 		List<String> idList = new ArrayList<>();
 		List<String> idCorso = new ArrayList<>();
 		//recupero l'idUtente avendo email e password
@@ -76,9 +76,36 @@ public class GestisciUtenti {
 					tmp.addAll(jdbcTemplate.queryForList("SELECT nome_corso from corsi where id_corso = '"+id_corso +"'", String.class));
 					listCorsi.add(tmp.get(0));
 					}
-			}
-			String corsi=String.join("<br>", listCorsi);
-			return corsi;
+		}
+		return listCorsi;
+
+	}
+	
+	public List<String> listaNuoviCorsi(String email, String password) {
+		GestistiCorsi gc = new GestistiCorsi(jdbcTemplate);
+		List<String> corsiNuovi = gc.getCorsi();
+		corsiNuovi.removeAll(getIscrizioneCorso(email, password));
+		System.out.println(corsiNuovi);
+		return corsiNuovi;
+	}
+	
+	public String getLinkNuoviCorsi(String email, String password) {
+		List<String> listCorsi = listaNuoviCorsi(email, password);
+		String corsi="";
+		for(String c: listCorsi) {
+			corsi +="<a href=\"Utenti/Corsi/" + c + "\">" + c + "</a><br>";}			
+			System.out.println(corsi);
+			return corsi;	
+	}
+	
+	public String getLinkIscrizioneCorso(String email, String password) {
+		List<String> listCorsi = getIscrizioneCorso(email, password);
+		String corsi="";
+		for(String c: listCorsi) {
+			corsi +="<a href=\"Utenti/Corsi/" + c + "\">" + c + "</a><br>";}			
+			System.out.println(corsi);
+			return corsi;	
+
 	}
 	
 	public String getUsername(String email, String password) {
@@ -87,50 +114,10 @@ public class GestisciUtenti {
 		return username.get(0);		
 	}
 	
-	public void showAll() {
-		List<String> allNamesList = new ArrayList<>();
-		allNamesList.addAll(jdbcTemplate.queryForList("SELECT nome from utenti", String.class));
-		List<String> allSurnamesList = new ArrayList<>();
-		allSurnamesList.addAll(jdbcTemplate.queryForList("SELECT cognome from utenti", String.class));
-		System.out.println("------------TUTTI GLI UTENTI----------------");
-		for(int i = 0; i<allNamesList.size(); i++) {
-			System.out.print("nome: " + allNamesList.get(i) + " cognome: " + allSurnamesList.get(i));
-			System.out.println("");
-		}
-		System.out.println("--------------------------------------------");
-	}
-	
-	public void showUsers() {
-		String sqlNome = "select nome from utenti u join ruolo r on u.idUtente = r.idUtente where tipo_ruolo like 'user';";
-		String sqlCognome = "select cognome from utenti u join ruolo r on u.idUtente = r.idUtente where tipo_ruolo like 'user';";
-		List<String> allNamesList = new ArrayList<>();
-		allNamesList.addAll(jdbcTemplate.queryForList(sqlNome, String.class));
-		List<String> allSurnamesList = new ArrayList<>();
-		allSurnamesList.addAll(jdbcTemplate.queryForList(sqlCognome, String.class));
-		System.out.println("------------SOLO GLI UTENTI----------------");
-		for(int i = 0; i<allNamesList.size(); i++) {
-			
-			System.out.print("nome: " + allNamesList.get(i) + " cognome: " + allSurnamesList.get(i));
-			System.out.println("");
-		}
-		System.out.println("--------------------------------------------");
-	}
-	
-	public void showAdmin() {
-		String sqlNome = "select nome from utenti u join ruolo r on u.idUtente = r.idUtente where tipo_ruolo like 'admin';";
-		String sqlCognome = "select cognome from utenti u join ruolo r on u.idUtente = r.idUtente where tipo_ruolo like 'admin';";
-		List<String> allNamesList = new ArrayList<>();
-		allNamesList.addAll(jdbcTemplate.queryForList(sqlNome, String.class));
-		List<String> allSurnamesList = new ArrayList<>();
-		allSurnamesList.addAll(jdbcTemplate.queryForList(sqlCognome, String.class));
-		System.out.println("------------TUTTI GLI ADMIN----------------");
-		for(int i = 0; i<allNamesList.size(); i++) {
-			
-			System.out.print("nome: " + allNamesList.get(i) + " cognome: " + allSurnamesList.get(i));
-			System.out.println("");
-		}
-		System.out.println("--------------------------------------------");
 
+	public void inscrizioneCorso(){
+		
 	}
+	
 	
 }
