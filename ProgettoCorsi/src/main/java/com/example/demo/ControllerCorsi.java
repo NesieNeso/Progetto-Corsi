@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class ControllerCorsi {
+	private String corso="";
 
 	@RequestMapping("Utenti/Corsi/uncinetto")
 	public String uncinetto() {
+		this.corso="uncinetto";
 		int i;
 		/*
 		 * TODO:recupera int i come ultima pagina visitata
@@ -20,6 +22,7 @@ public class ControllerCorsi {
 	
 	@RequestMapping("Utenti/Corsi/falegnameria")
 	public String falegnameria() {
+		this.corso="falegnameria";
 		int i;
 		/*
 		 * TODO:recupera int i come ultima pagina visitata
@@ -30,6 +33,7 @@ public class ControllerCorsi {
 	
 	@RequestMapping("Utenti/Corsi/cucina")
 	public String cucina() {
+		this.corso="cucina";
 		int i;
 		/*
 		 * TODO:recupera int i come ultima pagina visitata
@@ -39,11 +43,9 @@ public class ControllerCorsi {
 	}
 	
 	
-	
 	//Calcola la prossima pagina, utilizzando i parametri corso e pagina
 	@RequestMapping("/nextPage")
 	public String nextPage(HttpServletRequest req) {
-		String corso = req.getParameter("corso");
 		String pagina = req.getParameter("pagina");
 		String risultato = "Utenti/Corsi/" + corso + "/" + pagina;
 		

@@ -8,7 +8,7 @@
 </head>
 <body>
 	Pagina 3 del corso di falegnameria <br>
-	<a href="/nextPage?corso=falegnameria&pagina=2">pagina precedente</a>   
-	<a href="/nextPage?corso=falegnameria&pagina=4">pagina successiva</a>
+	<a href="/nextPage?pagina=2">pagina precedente</a>   
+	<a href="/nextPage?pagina=4">pagina successiva</a>
 </body>
 </html>
