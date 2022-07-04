@@ -14,23 +14,47 @@ public class GestisciUtenti {
 		this.jdbcTemplate=jdbcTemplate;
 	}
 	
-	public int insert(String username, String password) {
-		String sql = "INSERT INTO utenti (email, password) VALUES (?, ?)";
-		int result = jdbcTemplate.update(sql, username, password);
-		return result;
+	/**
+	 * 
+	 * 	Ritrona -1 se non esiste
+	 * 	ritrona > 0 se esiste
+	 * 
+	 * */
+	private int getId(String email, String password) {
+		try {
+		return jdbcTemplate.queryForObject(("SELECT idUtente from utenti where email='" + email + "' and password='" + password+"'"), Integer.class);
+		}catch (Exception e) {
+			return -1;
+		}
 	}
+	
+	public int insert(String email, String password) {
+		String sql = "INSERT INTO utenti (email, password) VALUES (?, ?)";
+		int result = jdbcTemplate.update(sql, email, password);
+		
+		System.out.println("id: " +  getId(email, password));
+		if(result == 1) {
+			sql = "INSERT INTO ruolo (idutente, tipo_ruolo) VALUES (?, 'user')";
+			return jdbcTemplate.update(sql,  getId(email, password));
+		}else
+			return -1;
+	}
+	
+	
+	
+	
 	
 	public List<String> getIdFromUserPassword(String email, String password) {
 		List<String> idList = new ArrayList<>();
 		idList.addAll(jdbcTemplate.queryForList("SELECT idUtente from utenti where email='" + email + "' and password='" + password+"'", String.class));
-		if(idList.get(0).equals("0")) {
-			
-		}else
+		System.out.println("è nulla: " + (idList == null) + ", è grossa: " + idList.size());
+		if(idList != null && idList.size() > 0) 
 			idList.addAll(jdbcTemplate.queryForList("SELECT tipo_ruolo from ruolo where idUtente = '"+idList.get(0) +"'", String.class));
+
 		return idList;		
 	}
 	
-	public List<String> getIscrizioneCorso(String email, String password) {
+	public String getIscrizioneCorso(String email, String password) {
 		List<String> idList = new ArrayList<>();
 		List<String> idCorso = new ArrayList<>();
 		//recupero l'idUtente avendo email e password
@@ -53,18 +77,8 @@ public class GestisciUtenti {
 					listCorsi.add(tmp.get(0));
 					}
 			}
-		return listCorsi;
-
-	}
-	
-	public String getLinkIscrizioneCorso(String email, String password) {
-		List<String> listCorsi =getIscrizioneCorso(email, password);
-		String corsi="";
-		for(String c: listCorsi) {
-			corsi +="<a href=\"Utenti/Corsi/" + c + "\">" + c + "</a><br>";}			
-			System.out.println(corsi);
+			String corsi=String.join("<br>", listCorsi);
 			return corsi;
-		
 	}
 	
 	public String getUsername(String email, String password) {
@@ -73,5 +87,50 @@ public class GestisciUtenti {
 		return username.get(0);		
 	}
 	
+	public void showAll() {
+		List<String> allNamesList = new ArrayList<>();
+		allNamesList.addAll(jdbcTemplate.queryForList("SELECT nome from utenti", String.class));
+		List<String> allSurnamesList = new ArrayList<>();
+		allSurnamesList.addAll(jdbcTemplate.queryForList("SELECT cognome from utenti", String.class));
+		System.out.println("------------TUTTI GLI UTENTI----------------");
+		for(int i = 0; i<allNamesList.size(); i++) {
+			System.out.print("nome: " + allNamesList.get(i) + " cognome: " + allSurnamesList.get(i));
+			System.out.println("");
+		}
+		System.out.println("--------------------------------------------");
+	}
+	
+	public void showUsers() {
+		String sqlNome = "select nome from utenti u join ruolo r on u.idUtente = r.idUtente where tipo_ruolo like 'user';";
+		String sqlCognome = "select cognome from utenti u join ruolo r on u.idUtente = r.idUtente where tipo_ruolo like 'user';";
+		List<String> allNamesList = new ArrayList<>();
+		allNamesList.addAll(jdbcTemplate.queryForList(sqlNome, String.class));
+		List<String> allSurnamesList = new ArrayList<>();
+		allSurnamesList.addAll(jdbcTemplate.queryForList(sqlCognome, String.class));
+		System.out.println("------------SOLO GLI UTENTI----------------");
+		for(int i = 0; i<allNamesList.size(); i++) {
+			
+			System.out.print("nome: " + allNamesList.get(i) + " cognome: " + allSurnamesList.get(i));
+			System.out.println("");
+		}
+		System.out.println("--------------------------------------------");
+	}
+	
+	public void showAdmin() {
+		String sqlNome = "select nome from utenti u join ruolo r on u.idUtente = r.idUtente where tipo_ruolo like 'admin';";
+		String sqlCognome = "select cognome from utenti u join ruolo r on u.idUtente = r.idUtente where tipo_ruolo like 'admin';";
+		List<String> allNamesList = new ArrayList<>();
+		allNamesList.addAll(jdbcTemplate.queryForList(sqlNome, String.class));
+		List<String> allSurnamesList = new ArrayList<>();
+		allSurnamesList.addAll(jdbcTemplate.queryForList(sqlCognome, String.class));
+		System.out.println("------------TUTTI GLI ADMIN----------------");
+		for(int i = 0; i<allNamesList.size(); i++) {
+			
+			System.out.print("nome: " + allNamesList.get(i) + " cognome: " + allSurnamesList.get(i));
+			System.out.println("");
+		}
+		System.out.println("--------------------------------------------");
+
+	}
 	
 }
