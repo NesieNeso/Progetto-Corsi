@@ -98,7 +98,8 @@ public class ControllerHome {
 					modelmap.put("email", email);
 					modelmap.put("password", password);
 					modelmap.put("username", gu.getUsername(email, password));
-					modelmap.put("corsi", gu.getIscrizioneCorso(email, password));
+					modelmap.put("corsi", gu.getLinkIscrizioneCorso(email, password));
+					modelmap.put("corsiNuovi", gu.getLinkNuoviCorsi(email, password));
 					return "Utenti/HomeUtenti";
 				}else if(tmp.get(1).equals("ban")) {
 					System.out.println("Bannato");
