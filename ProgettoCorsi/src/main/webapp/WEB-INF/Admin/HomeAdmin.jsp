@@ -26,7 +26,7 @@
 					<input id = "3" type = "submit" value="Mostra Admin">
 				</form>
 				<form action="/Admin/HomeAdmin/banner" method="post">
-					<input type="text" name="mailDaBannare" placeholder="inserire mail utente da bannare">
+					<input type="email" name="mailDaBannare" placeholder="mail utente da bannare">
 					<input id = "4" type = "submit" value="Banna">
 				</form>
 			

@@ -13,6 +13,10 @@ public class GestisciAdmin {
 		this.jdbcTemplate=jdbcTemplate;
 	}
 	
+	public String clear() {
+		return "";
+	}
+	
 	public String showAll() {
 		String Lista = "";
 		List<String> allNamesList = new ArrayList<>();
@@ -32,7 +36,8 @@ public class GestisciAdmin {
 		return Lista;
 	}
 	
-	public void showUsers() {
+	public String showUsers() {
+		String Lista = "";
 		String sqlNome = "select nome from utenti u join ruolo r on u.idUtente = r.idUtente where tipo_ruolo like 'user';";
 		String sqlCognome = "select cognome from utenti u join ruolo r on u.idUtente = r.idUtente where tipo_ruolo like 'user';";
 		String sqlEmail = "select email from utenti u join ruolo r on u.idUtente = r.idUtente where tipo_ruolo like 'user';";
@@ -47,11 +52,16 @@ public class GestisciAdmin {
 			
 			System.out.print("nome: " + allNamesList.get(i) + " cognome: " + allSurnamesList.get(i) + " email: " + allEmailsList.get(i));
 			System.out.println("");
+			Lista += "nome: " + allNamesList.get(i) + " cognome: " + allSurnamesList.get(i) + " email: " + allEmailsList.get(i) +"</br>";
+			
 		}
 		System.out.println("--------------------------------------------");
+		//System.out.println(Lista);
+		return Lista;
 	}
 	
-	public void showAdmin() {
+	public String showAdmin() {
+		String Lista = "";
 		String sqlNome = "select nome from utenti u join ruolo r on u.idUtente = r.idUtente where tipo_ruolo like 'admin';";
 		String sqlCognome = "select cognome from utenti u join ruolo r on u.idUtente = r.idUtente where tipo_ruolo like 'admin';";
 		String sqlEmail = "select email from utenti u join ruolo r on u.idUtente = r.idUtente where tipo_ruolo like 'admin';";
@@ -66,9 +76,12 @@ public class GestisciAdmin {
 			
 			System.out.print("nome: " + allNamesList.get(i) + " cognome: " + allSurnamesList.get(i) + " email: " + allEmailsList.get(i));
 			System.out.println("");
+			Lista += "nome: " + allNamesList.get(i) + " cognome: " + allSurnamesList.get(i) + " email: " + allEmailsList.get(i) +"</br>";
+			
 		}
 		System.out.println("--------------------------------------------");
-
+		//System.out.println(Lista);
+		return Lista;
 	}
 }
 	

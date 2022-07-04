@@ -23,8 +23,8 @@ public class ControllerAdmin {
 		GestisciAdmin g = new GestisciAdmin(jdbcTemplate);
 		g.showAll();
 		
-		HttpSession ses = req.getSession();
-		ses.setAttribute("risultato", g.showAll());
+		HttpSession sesAll = req.getSession();
+		sesAll.setAttribute("risultato", g.showAll());
 
 		return "/Admin/HomeAdmin";
 	}
@@ -34,8 +34,8 @@ public class ControllerAdmin {
 		GestisciAdmin g = new GestisciAdmin(jdbcTemplate);
 		g.showUsers();
 		
-		HttpSession ses = req.getSession();
-		ses.setAttribute("risultato", g.showAll());
+		HttpSession sesUser = req.getSession();
+		sesUser.setAttribute("risultato", g.showUsers());
 		
 		return "/Admin/HomeAdmin";
 	}
@@ -44,13 +44,22 @@ public class ControllerAdmin {
 		GestisciAdmin g = new GestisciAdmin(jdbcTemplate);
 		g.showAdmin();
 
-		HttpSession ses = req.getSession();
-		ses.setAttribute("risultato", g.showAll());
+		HttpSession sesAdmin = req.getSession();
+		sesAdmin.setAttribute("risultato", g.showAdmin());
 		
 		
 		return "/Admin/HomeAdmin";
 	}
 	
-
+	@PostMapping("/Admin/HomeAdmin/clearResults")
+	public String clearResults(HttpServletRequest req) {
+		GestisciAdmin g = new GestisciAdmin(jdbcTemplate);
+		g.showUsers();
+		
+		HttpSession sesClear = req.getSession();
+		sesClear.setAttribute("risultato", g.clear());
+		
+		return "/Admin/HomeAdmin";
+	}
 
 }
