@@ -108,14 +108,87 @@ public class GestisciAdmin {
 		return Lista;
 	}
 	
-	public String ban(String mailBannato) {
-		String bannedUser = "";
-		String sqlBan = "select u.idUtente from utenti u join ruolo r on u.idUtente = r.idUtente where tipo_ruolo like '" + mailBannato + "';";
-		
+	public int ban(String mailBannato) {
+		int flag = 0;
+		String sqlBan = "select u.idUtente from utenti u join ruolo r on u.idUtente = r.idUtente where email like '" + mailBannato + "';";
 		int idBannare = jdbcTemplate.queryForObject(sqlBan, Integer.class);
 		
+		String sqlBanning;
+		try {
+			sqlBanning = "update ruolo set tipo_ruolo = 'ban' where idutente = " + idBannare +";";
+			flag = jdbcTemplate.update(sqlBanning);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("ERRORE" + e.toString());
+			e.printStackTrace();
+		}
 		
-		return bannedUser;
+		return flag;
+	}
+
+	public int check(String email) {
+		int result = -1;
+		String mailFlag = email;
+		
+		String sqlMailAll = "select email from utenti;";
+		List<String> allEmailsList = new ArrayList<>();
+		allEmailsList.addAll(jdbcTemplate.queryForList(sqlMailAll, String.class));
+		
+		// controllo che la mail esista nel DB
+		for(String k : allEmailsList) {
+			if(k.equals(mailFlag)) {
+				result = 1;
+			} 
+		}
+		
+		// essendo nel db, vado a vedere a che ruolo appartiene la mail
+		if(result == 1) {
+			
+			String sqlMailUsers = "select email from utenti u join ruolo r on u.idUtente = r.idUtente where tipo_ruolo like 'user';";
+			List<String> usersEmailsList = new ArrayList<>();
+			usersEmailsList.addAll(jdbcTemplate.queryForList(sqlMailUsers, String.class));
+			
+			String sqlMailAdmin = "select email from utenti u join ruolo r on u.idUtente = r.idUtente where tipo_ruolo like 'admin';";
+			List<String> adminsEmailsList = new ArrayList<>();
+			adminsEmailsList.addAll(jdbcTemplate.queryForList(sqlMailAdmin, String.class));
+			
+			String sqlMailBanned = "select email from utenti u join ruolo r on u.idUtente = r.idUtente where tipo_ruolo like 'ban';";
+			List<String> bannedEmailsList = new ArrayList<>();
+			bannedEmailsList.addAll(jdbcTemplate.queryForList(sqlMailBanned, String.class));
+			
+			for(String k : usersEmailsList) {
+				if(k.equals(mailFlag)) result = 2;
+			}
+			
+			for(String k : adminsEmailsList) {
+				if(k.equals(mailFlag)) result = 3;
+			}
+			
+			for(String k : bannedEmailsList) {
+				if(k.equals(mailFlag)) result = 4;
+			}
+			
+		}
+		
+		return result;
+	}
+
+	public int sban(String emailSbannare) {
+		int flag = 0;
+		String sqlBan = "select u.idUtente from utenti u join ruolo r on u.idUtente = r.idUtente where email like '" + emailSbannare + "';";
+		int idBannare = jdbcTemplate.queryForObject(sqlBan, Integer.class);
+		
+		String sqlBanning;
+		try {
+			sqlBanning = "update ruolo set tipo_ruolo = 'user' where idutente = " + idBannare +";";
+			flag = jdbcTemplate.update(sqlBanning);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("ERRORE" + e.toString());
+			e.printStackTrace();
+		}
+		
+		return flag;
 	}
 }
 	

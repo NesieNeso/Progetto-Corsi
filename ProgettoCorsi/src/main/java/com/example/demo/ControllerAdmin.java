@@ -9,8 +9,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ControllerAdmin {
@@ -78,5 +80,75 @@ public class ControllerAdmin {
 		return "/Admin/HomeAdmin";
 	}
 
+	@PostMapping("/Admin/HomeAdmin/banner")
+	public String banning(HttpServletRequest req, @RequestParam("mailDaBannare") String email, ModelMap modelmap) {
+		GestisciAdmin g = new GestisciAdmin(jdbcTemplate);
+		
+		HttpSession sesBan = req.getSession();
+		
+		System.out.println("email field: " + email);
+		
+		int check = g.check(email);
+		
+		switch(check) {
+		case -1:
+			sesBan.setAttribute("risultato", "Non esiste l'utente che vuoi bannare");
+			break;
+		case 1:
+			sesBan.setAttribute("risultato", "L'utente esiste, ma non ha un ruolo");
+			break;
+		case 2:
+			sesBan.setAttribute("risultato", "L'utente esiste, è un utente");
+			int flag = g.ban(email);
+			if(flag>0)
+				sesBan.setAttribute("risultato", "L'utente esiste, è un utente ed è stato bannato");
+			break;
+		case 3:
+			sesBan.setAttribute("risultato", "L'utente esiste, è un admin");
+			break;
+		case 4:
+			sesBan.setAttribute("risultato", "L'utente esiste, è già bannato");
+			break;
+		default:
+			sesBan.setAttribute("risultato", "ERRORE");
+			break;
+		}
+		return "/Admin/HomeAdmin";
+	}
 	
+	@PostMapping("/Admin/HomeAdmin/sbanner")
+	public String sbanning(HttpServletRequest req, @RequestParam("mailDaSbannare") String email, ModelMap modelmap) {
+		GestisciAdmin g = new GestisciAdmin(jdbcTemplate);
+		
+		HttpSession sesBan = req.getSession();
+		
+		System.out.println("email field: " + email);
+		
+		int check = g.check(email);
+		
+		switch(check) {
+		case -1:
+			sesBan.setAttribute("risultato", "Non esiste l'utente che vuoi bannare");
+			break;
+		case 1:
+			sesBan.setAttribute("risultato", "L'utente esiste, ma non ha un ruolo");
+			break;
+		case 2:
+			sesBan.setAttribute("risultato", "L'utente esiste, è un utente");
+			break;
+		case 3:
+			sesBan.setAttribute("risultato", "L'utente esiste, è un admin");
+			break;
+		case 4:
+			sesBan.setAttribute("risultato", "L'utente esiste, è già bannato");
+			int flag = g.sban(email);
+			if(flag>0)
+				sesBan.setAttribute("risultato", "L'utente esiste, era bannato ed è stato sbannato");
+			break;
+		default:
+			sesBan.setAttribute("risultato", "ERRORE");
+			break;
+		}
+		return "/Admin/HomeAdmin";
+	}
 }
