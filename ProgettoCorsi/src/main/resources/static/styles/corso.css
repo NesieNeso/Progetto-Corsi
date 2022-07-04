@@ -1,0 +1,41 @@
+.titolo{
+	text-align: center;
+	font-family: cursive;
+	padding-top: 10px; 
+	border-bottom: 1px solid black;
+}
+
+.testo{
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 30px; 
+	padding-bottom: 30px; 
+	text-align: justify;
+	padding-bottom: 20px;
+	border-bottom: 1px solid black;	
+}
+
+.links{
+	margin: auto;
+    width: max-content;
+    display: flex;
+    padding-top: 10px;
+}
+
+.page{
+	font-size: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.link{
+	text-decoration: none;
+	font-size: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.noclick{
+	visibility: hidden;
+}
+
