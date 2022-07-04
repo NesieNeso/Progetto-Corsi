@@ -25,29 +25,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class ControllerHome {
 
-	
-	private String convertpassword(char[] password) {
-		byte[] gt = {54,4,48};
-		SecretKeyFactory factory;
-		SecretKey secret = null;
-		try {
-			factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
-			KeySpec spec = new PBEKeySpec(password, gt , 65536, 256);
-			SecretKey tmp = factory.generateSecret(spec);
-			secret = new SecretKeySpec(tmp.getEncoded(), "AES");
-		} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
-		return secret.toString();
-	}
-	
-	
-	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+		
 	private boolean flagError = false;
+	private boolean ban = false;
 	
 	private String bnt;
 	
@@ -58,8 +41,6 @@ public class ControllerHome {
 		req.setAttribute("errorLogin", "");
 
 		
-		
-		
 		if(flagError) {
 			/* GESTIONE DEGLI ERRORI */
 			System.out.println("-> errore;");
@@ -68,16 +49,21 @@ public class ControllerHome {
 			if(bnt.equals("Login")) {
 				req.setAttribute("errorLogin", "Password o Email errati");
 			}else
-				req.setAttribute("errorLogin", "c'è stato un errore nella registrazione");
+				req.setAttribute("errorLogin", "Account già registrato");
 			
 			return "home/LoginPage";
 			
+		}else if (ban){
+			ban = false;
+			System.out.println("-> Ban;");
+			req.setAttribute("errorLogin", "Sei stato bannato");
+			return "home/LoginPage";
 		}else {		
-			
+			System.out.println("-> Login o registrazione;");
 			req.setAttribute("errorEmail", "");
 			req.setAttribute("errorPass", "");
 			/* Stiamo facendo il login o la registrazione*/
-			System.out.println("-> Login o registrazione");
+
 			return "home/LoginPage";
 
 		}	
@@ -88,12 +74,7 @@ public class ControllerHome {
 	//Decide che pagina visualizzare, se admin o user
 	@PostMapping("/redirector")
 	public String redirector(HttpServletRequest request, @RequestParam("email") String email, @RequestParam("password") String password, ModelMap modelmap) {
-		
-
-		
 		GestisciUtenti gu = new GestisciUtenti(jdbcTemplate);
-
-		
 
 		HttpSession ses = request.getSession();
 		bnt = request.getParameter("bnt");	
@@ -114,34 +95,44 @@ public class ControllerHome {
 		
 
 		if(bnt.equals("Login")) {
-			modelmap.put("email", email);
-			modelmap.put("password", password);
-			modelmap.put("username", gu.getUsername(email, password));
-			modelmap.put("corsi", gu.getIscrizioneCorso(email, password));
+
 			/* Siamo in login*/
 			List<String> tmp = gu.getIdFromUserPassword(email, password);
-			if(tmp.size() == 2) { 
-				if(tmp.get(1).equals("user")) 
+					
+			if(tmp.size() == 2) {
+				if(tmp.get(1).equals("user")) { 
+					System.out.println("Login");
+					/*SONO UN UTENTE*/
+					ses.setAttribute("id", tmp.get(0));
+					
+					modelmap.put("email", email);
+					modelmap.put("password", password);
+					modelmap.put("username", gu.getUsername(email, password));
+					modelmap.put("corsi", gu.getIscrizioneCorso(email, password));
 					return "Utenti/HomeUtenti";
-				else 
+				}else if(tmp.get(1).equals("ban")) {
+					System.out.println("Bannato");
+					ban = true;
+					return "redirect:/";
+				}else 
 					return "Admin/HomeAdmin";
 			}else{
+				System.out.println("errore ");
 				flagError = true;
-				return "home/LoginPage";
+				return "redirect:/";
 			}
 		}else {
 			/* Siamo in Registrazione*/
 			
 			try {
 				
-				gu.insert(email, password);
+				int res = gu.insert(email, password);
+				if(res > 0) {
+					return "home/LoginPage";
+				}else {
+					return "redirect:/";
+				}
 				
-				modelmap.put("email", email);
-				modelmap.put("password", password);
-				modelmap.put("username", gu.getUsername(email, password));
-				modelmap.put("corsi", gu.getIscrizioneCorso(email, password));
-				
-				return "Utenti/HomeUtenti";
 			}catch (Exception e) {
 				flagError = true;
 				return "redirect:/";

@@ -14,19 +14,43 @@ public class GestisciUtenti {
 		this.jdbcTemplate=jdbcTemplate;
 	}
 	
-	public int insert(String username, String password) {
-		String sql = "INSERT INTO utenti (email, password) VALUES (?, ?)";
-		int result = jdbcTemplate.update(sql, username, password);
-		return result;
+	/**
+	 * 
+	 * 	Ritrona -1 se non esiste
+	 * 	ritrona > 0 se esiste
+	 * 
+	 * */
+	private int getId(String email, String password) {
+		try {
+		return jdbcTemplate.queryForObject(("SELECT idUtente from utenti where email='" + email + "' and password='" + password+"'"), Integer.class);
+		}catch (Exception e) {
+			return -1;
+		}
 	}
+	
+	public int insert(String email, String password) {
+		String sql = "INSERT INTO utenti (email, password) VALUES (?, ?)";
+		int result = jdbcTemplate.update(sql, email, password);
+		
+		System.out.println("id: " +  getId(email, password));
+		if(result == 1) {
+			sql = "INSERT INTO ruolo (idutente, tipo_ruolo) VALUES (?, 'user')";
+			return jdbcTemplate.update(sql,  getId(email, password));
+		}else
+			return -1;
+	}
+	
+	
+	
+	
 	
 	public List<String> getIdFromUserPassword(String email, String password) {
 		List<String> idList = new ArrayList<>();
 		idList.addAll(jdbcTemplate.queryForList("SELECT idUtente from utenti where email='" + email + "' and password='" + password+"'", String.class));
-		if(idList.get(0).equals("0")) {
-			
-		}else
+		System.out.println("è nulla: " + (idList == null) + ", è grossa: " + idList.size());
+		if(idList != null && idList.size() > 0) 
 			idList.addAll(jdbcTemplate.queryForList("SELECT tipo_ruolo from ruolo where idUtente = '"+idList.get(0) +"'", String.class));
+
 		return idList;		
 	}
 	
