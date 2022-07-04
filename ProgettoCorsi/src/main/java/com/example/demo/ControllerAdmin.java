@@ -20,7 +20,7 @@ public class ControllerAdmin {
 	
 	@PostMapping("/Admin/HomeAdmin/allUsers")
 	public String allUsers(HttpServletRequest req) {
-		GestisciUtenti g = new GestisciUtenti(jdbcTemplate);
+		GestisciAdmin g = new GestisciAdmin(jdbcTemplate);
 		g.showAll();
 		
 		HttpSession ses = req.getSession();
@@ -31,7 +31,7 @@ public class ControllerAdmin {
 
 	@PostMapping("/Admin/HomeAdmin/onlyUsers")
 	public String onlyUsers(HttpServletRequest req) {
-		GestisciUtenti g = new GestisciUtenti(jdbcTemplate);
+		GestisciAdmin g = new GestisciAdmin(jdbcTemplate);
 		g.showUsers();
 		
 		HttpSession ses = req.getSession();
@@ -41,7 +41,7 @@ public class ControllerAdmin {
 	}
 	@PostMapping("/Admin/HomeAdmin/onlyAdmin")
 	public String onlyAdmins(HttpServletRequest req) {
-		GestisciUtenti g = new GestisciUtenti(jdbcTemplate);
+		GestisciAdmin g = new GestisciAdmin(jdbcTemplate);
 		g.showAdmin();
 
 		HttpSession ses = req.getSession();
