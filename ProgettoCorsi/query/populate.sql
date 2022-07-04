@@ -18,3 +18,6 @@ insert into iscritto (id_corso, id_utente) values (1, 1);
 insert into iscritto (id_corso, id_utente, pagina_attuale) values (1, 2, 3);
 insert into iscritto (id_corso, id_utente) values (2, 2);
 insert into iscritto (id_corso, id_utente) values (2, 1);
+
+Insert INTO utenti (nome, cognome, username, password, email) VALUES ('Luigi', 'Rossi', 'RL', 'password', 'ban@gmail.com');
+Insert INTO ruolo (idutente, tipo_ruolo) VALUES (6, 'ban');

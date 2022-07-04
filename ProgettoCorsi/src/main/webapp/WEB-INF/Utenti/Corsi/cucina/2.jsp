@@ -8,7 +8,7 @@
 </head>
 <body>
 	Pagina 2 del corso di cucina <br>
-	<a href="/nextPage?corso=cucina&pagina=3">prossima pagina</a>     
-	<a href="/nextPage?corso=cucina&pagina=1">pagina precedente</a>
+	<a href="/nextPage?pagina=3">prossima pagina</a>     
+	<a href="/nextPage?pagina=1">pagina precedente</a>
 </body>
 </html>

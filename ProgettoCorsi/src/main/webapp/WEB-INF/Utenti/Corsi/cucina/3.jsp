@@ -8,6 +8,6 @@
 </head>
 <body>
 	Pagina 3 del corso di cucina <br>
-	<a href="/nextPage?corso=cucina&pagina=2">pagina precedente</a>
+	<a href="/nextPage?pagina=2">pagina precedente</a>
 </body>
 </html>
