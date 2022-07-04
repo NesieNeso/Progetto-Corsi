@@ -107,5 +107,15 @@ public class GestisciAdmin {
 		//System.out.println(Lista);
 		return Lista;
 	}
+	
+	public String ban(String mailBannato) {
+		String bannedUser = "";
+		String sqlBan = "select u.idUtente from utenti u join ruolo r on u.idUtente = r.idUtente where tipo_ruolo like '" + mailBannato + "';";
+		
+		int idBannare = jdbcTemplate.queryForObject(sqlBan, Integer.class);
+		
+		
+		return bannedUser;
+	}
 }
 	
