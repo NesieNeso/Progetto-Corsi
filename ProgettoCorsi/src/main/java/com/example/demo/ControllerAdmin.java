@@ -18,6 +18,12 @@ public class ControllerAdmin {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
+
+	@RequestMapping("/HomeAdmin")
+	public String homeAdmin() {
+		return "Admin/HomeAdmin";
+	}
+	
 	@PostMapping("/Admin/HomeAdmin/allUsers")
 	public String allUsers(HttpServletRequest req) {
 		GestisciAdmin g = new GestisciAdmin(jdbcTemplate);
@@ -54,10 +60,21 @@ public class ControllerAdmin {
 	@PostMapping("/Admin/HomeAdmin/clearResults")
 	public String clearResults(HttpServletRequest req) {
 		GestisciAdmin g = new GestisciAdmin(jdbcTemplate);
-		g.showUsers();
+		g.clear();
 		
 		HttpSession sesClear = req.getSession();
 		sesClear.setAttribute("risultato", g.clear());
+		
+		return "/Admin/HomeAdmin";
+	}
+	
+	@PostMapping("/Admin/HomeAdmin/onlyBanned")
+	public String onlyBanned(HttpServletRequest req) {
+		GestisciAdmin g = new GestisciAdmin(jdbcTemplate);
+		g.showBanned();
+		
+		HttpSession sesClear = req.getSession();
+		sesClear.setAttribute("risultato", g.showBanned());
 		
 		return "/Admin/HomeAdmin";
 	}

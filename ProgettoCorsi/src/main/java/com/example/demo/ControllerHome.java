@@ -149,10 +149,6 @@ public class ControllerHome {
 	
 	}
 	
-	@RequestMapping("/HomeAdmin")
-	public String homeAdmin() {
-		return "Admin/HomeAdmin";
-	}
 	
 	@RequestMapping("/HomeUtenti")
 	public String homeUtenti() {
