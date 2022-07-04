@@ -23,6 +23,9 @@
 		</div>
 		<div style="color:black;text-align:center">
 			<h1 style="font-family:verdana;font-size:20px ;"> ${corsiNuovi} </h1> </br>
+			<form method="post" action="redirector"> 
+					<div class= "error"> ${errorInsertion} </div><br>
+				</form>
 		</div>
 
 </body>

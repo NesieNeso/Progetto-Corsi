@@ -14,13 +14,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ControllerCorsi {
 	private String corso="";
-	private String id="";
+	private String id=null;
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
 	private void setId(HttpSession session) {
+		try {
 		id=session.getAttribute("id").toString();
+		}
+		catch(NullPointerException e) {
+			id=null;
+		}
 		System.out.println("l'utente di id " + id + " sta navigando il corso di " + corso);
 	}
 	
@@ -36,6 +41,8 @@ public class ControllerCorsi {
 	public String uncinetto(HttpServletRequest req) {
 		this.corso="uncinetto";
 		setId(req.getSession());
+		if(id==null)
+			return "home/LoginPage";
 		return "Utenti/Corsi/uncinetto/"+ getLastPage();
 	}
 	
@@ -43,6 +50,8 @@ public class ControllerCorsi {
 	public String falegnameria(HttpServletRequest req) {
 		this.corso="falegnameria";
 		setId(req.getSession());
+		if(id==null)
+			return "home/LoginPage";
 		return "Utenti/Corsi/falegnameria/" + getLastPage();
 	}
 	
@@ -50,6 +59,8 @@ public class ControllerCorsi {
 	public String cucina(HttpServletRequest req) {
 		this.corso="cucina";
 		setId(req.getSession());
+		if(id==null)
+			return "home/LoginPage";
 		return "Utenti/Corsi/cucina/"+ getLastPage();
 	}
 	
