@@ -13,7 +13,7 @@ public class ProgettoCorsiApplication {
 		
 		
 		
-		ApplicationContext context = new ClassPathXmlApplicationContext("config.xml");
+		//ApplicationContext context = new ClassPathXmlApplicationContext("config.xml");
 		
 	}
 
