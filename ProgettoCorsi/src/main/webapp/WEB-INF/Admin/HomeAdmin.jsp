@@ -25,9 +25,16 @@
 				<form action="/Admin/HomeAdmin/onlyAdmin" method="post">
 					<input id = "3" type = "submit" value="Mostra Admin">
 				</form>
+				<form action="/Admin/HomeAdmin/onlyBanned" method="post">
+					<input id = "4" type = "submit" value="Mostra Bannati">
+				</form>
 				<form action="/Admin/HomeAdmin/banner" method="post">
 					<input type="email" name="mailDaBannare" placeholder="mail utente da bannare">
-					<input id = "4" type = "submit" value="Banna">
+					<input id = "6" type = "submit" value="Banna">
+				</form>
+				<form action="/Admin/HomeAdmin/sbanner" method="post">
+					<input type="email" name="mailDaBannare" placeholder="mail utente da sbannare">
+					<input id = "7" type = "submit" value="Sbanna">
 				</form>
 			
 				${risultato}
