@@ -114,6 +114,7 @@ public class ControllerHome {
 			modelmap.put("password", password);
 			modelmap.put("username", gu.getUsername(email, password));
 			modelmap.put("corsi", gu.getLinkIscrizioneCorso(email, password));
+			modelmap.put("corsiNuovi", gu.getLinkNuoviCorsi(email, password));
 			/* Siamo in login*/
 			List<String> tmp = gu.getIdFromUserPassword(email, password);
 			if(tmp.size() == 2) { 

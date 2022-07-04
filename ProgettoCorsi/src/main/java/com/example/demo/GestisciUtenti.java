@@ -57,14 +57,30 @@ public class GestisciUtenti {
 
 	}
 	
-	public String getLinkIscrizioneCorso(String email, String password) {
-		List<String> listCorsi =getIscrizioneCorso(email, password);
+	public List<String> listaNuoviCorsi(String email, String password) {
+		GestistiCorsi gc = new GestistiCorsi(jdbcTemplate);
+		List<String> corsiNuovi = gc.getCorsi();
+		corsiNuovi.removeAll(getIscrizioneCorso(email, password));
+		System.out.println(corsiNuovi);
+		return corsiNuovi;
+	}
+	
+	public String getLinkNuoviCorsi(String email, String password) {
+		List<String> listCorsi = listaNuoviCorsi(email, password);
 		String corsi="";
 		for(String c: listCorsi) {
 			corsi +="<a href=\"Utenti/Corsi/" + c + "\">" + c + "</a><br>";}			
 			System.out.println(corsi);
-			return corsi;
-		
+			return corsi;	
+	}
+	
+	public String getLinkIscrizioneCorso(String email, String password) {
+		List<String> listCorsi = getIscrizioneCorso(email, password);
+		String corsi="";
+		for(String c: listCorsi) {
+			corsi +="<a href=\"Utenti/Corsi/" + c + "\">" + c + "</a><br>";}			
+			System.out.println(corsi);
+			return corsi;	
 	}
 	
 	public String getUsername(String email, String password) {
