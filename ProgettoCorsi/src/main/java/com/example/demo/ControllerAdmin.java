@@ -18,7 +18,6 @@ public class ControllerAdmin {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
-
 	@RequestMapping("/HomeAdmin")
 	public String homeAdmin() {
 		return "Admin/HomeAdmin";
