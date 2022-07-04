@@ -41,9 +41,6 @@ public class GestisciUtenti {
 	}
 	
 	
-	
-	
-	
 	public List<String> getIdFromUserPassword(String email, String password) {
 		List<String> idList = new ArrayList<>();
 		idList.addAll(jdbcTemplate.queryForList("SELECT idUtente from utenti where email='" + email + "' and password='" + password+"'", String.class));

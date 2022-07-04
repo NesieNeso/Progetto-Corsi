@@ -127,8 +127,6 @@ public class ControllerHome {
 				flagError = true;
 				return "redirect:/";
 			}
-
-
 		}
 	
 	}
