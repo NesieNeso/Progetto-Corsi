@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -15,15 +16,16 @@ public class GestisciCarrello {
 	public String getLinkCorsi(String idUtente) {
 		GestistiCorsi gC = new GestistiCorsi(jdbcTemplate);
 		GestisciUtenti gU = new GestisciUtenti(jdbcTemplate);
-		String link = "";
+		String link = "", email = "", password = "", corsi="";
+		List<String> listaNuoviCorsi = new ArrayList<String>();
 		
-		String sqlMail = "select email from utenti where idUtente like '" + idUtente +"';";
-		String email = jdbcTemplate.queryForObject(sqlMail, String.class);
-		String sqlPsw = "select password from utenti where idUtente like '" + idUtente +"';";
-		String password = jdbcTemplate.queryForObject(sqlPsw, String.class);
+		email = gU.getEmailFromId(idUtente);
+		password = gU.getPasswordFromId(idUtente);
+		listaNuoviCorsi = gU.listaNuoviCorsi(email, password);
 		
-		link=gU.getLinkIscrizioneCorso(email, password);
+		for(String c: listaNuoviCorsi) {
+			corsi +="<a href=inserisciNelCarrello?corso="+c+">" + c + "</a><br>";}
 		
-		return link;
+		return corsi;
 	}	
 }

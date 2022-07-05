@@ -40,10 +40,6 @@ public class ControllerCarrello {
 		String id_utente = session.getAttribute("id").toString();
 		String nome_corso = req.getParameter("corso");
 
-		/*
-		 * aggiunge nome_corso al carrello dell'utente id_utente e al 
-		 * db iscritto
-		 */
 		gc.acquistaCorso(id_utente, nome_corso);
 
 		
