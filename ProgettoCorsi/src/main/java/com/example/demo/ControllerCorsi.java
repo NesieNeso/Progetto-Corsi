@@ -40,7 +40,9 @@ public class ControllerCorsi {
 	public String uncinetto(HttpServletRequest req, @PathVariable String nomeCorso) {
 		this.corso=nomeCorso;
 		setId(req.getSession());
-		if(id==null)
+		//Controllo che l'id e il corso siano validi
+		GestisciUtenti gu = new GestisciUtenti(jdbcTemplate);
+		if(id==null || !gu.getIscrizioneCorso(id).contains(nomeCorso))
 			return "home/LoginPage";
 		return "Utenti/Corsi/" + nomeCorso + "/" + getLastPage();
 	}	
@@ -48,7 +50,6 @@ public class ControllerCorsi {
 	//Calcola la prossima pagina, utilizzando i parametri corso e pagina
 	@RequestMapping("/nextPage")
 	public String nextPage(HttpServletRequest req) {
-		System.out.println("PASSO DI QUI");
 		String pagina = req.getParameter("pagina");
 		String risultato = "Utenti/Corsi/" + corso + "/" + pagina;
 		setLastPage(pagina);		
