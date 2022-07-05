@@ -22,7 +22,7 @@ public class GestisciCarrello {
 		String sqlPsw = "select password from utenti where idUtente like '" + idUtente +"';";
 		String password = jdbcTemplate.queryForObject(sqlPsw, String.class);
 		
-		gU.getLinkIscrizioneCorso(email, password);
+		link=gU.getLinkIscrizioneCorso(email, password);
 		
 		return link;
 	}	
