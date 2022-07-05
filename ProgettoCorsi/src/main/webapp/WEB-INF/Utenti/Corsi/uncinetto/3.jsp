@@ -8,6 +8,6 @@
 </head>
 <body>
 	Pagina 3 del corso di uncinetto <br>
-	<a href="/nextPage?pagina=2">pagina precedente</a>
+	<a href="/Utenti/Corsi/nextPage?pagina=2">pagina precedente</a>
 </body>
 </html>

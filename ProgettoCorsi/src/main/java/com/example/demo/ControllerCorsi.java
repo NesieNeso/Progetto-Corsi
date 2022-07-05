@@ -1,17 +1,16 @@
 package com.example.demo;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("Utenti/Corsi")
 public class ControllerCorsi {
 	private String corso="";
 	private String id=null;
@@ -37,33 +36,16 @@ public class ControllerCorsi {
 		jdbcTemplate.update("update iscritto set pagina_attuale=" + pagina + " where id_utente=" + id + " and id_corso in( select id_corso from corsi where nome_corso = '" + corso + "')");
 	}
 	
-	@RequestMapping("Utenti/Corsi/uncinetto")
-	public String uncinetto(HttpServletRequest req) {
-		this.corso="uncinetto";
+	@RequestMapping(value = "/{nomeCorso}")
+	public String uncinetto(HttpServletRequest req, @PathVariable String nomeCorso) {
+		this.corso=nomeCorso;
 		setId(req.getSession());
-		if(id==null)
+		//Controllo che l'id e il corso siano validi
+		GestisciUtenti gu = new GestisciUtenti(jdbcTemplate);
+		if(id==null || !gu.getIscrizioneCorso(id).contains(nomeCorso))
 			return "home/LoginPage";
-		return "Utenti/Corsi/uncinetto/"+ getLastPage();
-	}
-	
-	@RequestMapping("Utenti/Corsi/falegnameria")
-	public String falegnameria(HttpServletRequest req) {
-		this.corso="falegnameria";
-		setId(req.getSession());
-		if(id==null)
-			return "home/LoginPage";
-		return "Utenti/Corsi/falegnameria/" + getLastPage();
-	}
-	
-	@RequestMapping("Utenti/Corsi/cucina")
-	public String cucina(HttpServletRequest req) {
-		this.corso="cucina";
-		setId(req.getSession());
-		if(id==null)
-			return "home/LoginPage";
-		return "Utenti/Corsi/cucina/"+ getLastPage();
-	}
-	
+		return "Utenti/Corsi/" + nomeCorso + "/" + getLastPage();
+	}	
 	
 	//Calcola la prossima pagina, utilizzando i parametri corso e pagina
 	@RequestMapping("/nextPage")

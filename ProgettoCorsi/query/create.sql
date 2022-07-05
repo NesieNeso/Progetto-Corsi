@@ -1,10 +1,10 @@
 drop table carrello;
-drop table costo;
 drop table iscritto;
 drop table corsi;
 drop table ruolo;
 drop table utenti;
 drop table localizzazione;
+drop table costo;
 
 create table localizzazione (
 	id_locale int(11) primary key auto_increment,
@@ -30,12 +30,20 @@ CREATE TABLE ruolo (
   FOREIGN KEY (idutente) REFERENCES utenti(idUtente)
 );
 
+create table costo (
+	id_costo int(11) primary key auto_increment,
+    euro int(11) not null,
+    sconto int(3) not null default 0
+);
+
 create table corsi (
 	id_corso int(11) auto_increment primary key,
     nome_corso varchar(32) not null unique,
     numero_pagine int(11) not null,
     descrizione text,
-    autore varchar(32)
+    autore varchar(32),
+    id_costo int(11) not null default 1,
+    foreign key (id_costo) references costo(id_costo)
 );
 
 create table iscritto (
@@ -47,17 +55,12 @@ create table iscritto (
     foreign key(id_utente) references utenti(idUtente)
 );
 
-create table costo (
-	id_costo int(11) primary key auto_increment,
-    euro int(11) not null,
-    sconto int(3) not null default 0
-);
-
 create table carrello (
 	id_utente int(11) not null,
     id_corso int(11) not null,
     id_costo int(11) not null,
     dataora timestamp not null,
+    acquistato boolean default false,
     primary key(id_utente, id_corso),
     foreign key(id_corso) references corsi(id_corso),
     foreign key(id_utente) references utenti(idUtente),
