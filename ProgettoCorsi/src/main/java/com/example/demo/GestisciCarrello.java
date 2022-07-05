@@ -27,5 +27,11 @@ public class GestisciCarrello {
 			corsi +="<a href=inserisciNelCarrello?corso="+c+">" + c + "</a><br>";}
 		
 		return corsi;
+	}
+
+	// aggiunge nome_corso al carrello dell'utente id_utente e al db iscritto
+	public void acquistaCorso(String id_utente, String nome_corso) {
+		
+		
 	}	
 }
