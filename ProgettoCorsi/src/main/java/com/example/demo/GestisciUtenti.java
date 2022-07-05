@@ -109,5 +109,16 @@ public class GestisciUtenti {
 		return username.get(0);		
 	}
 	
+	public String getEmailFromId(String idUtente) {
+		String sqlMail = "select email from utenti where idUtente like '" + idUtente +"';";
+		String email = jdbcTemplate.queryForObject(sqlMail, String.class);
+		return email;
+	}
+	
+	public String getPasswordFromId(String idUtente) {
+		String sqlPsw = "select password from utenti where idUtente like '" + idUtente +"';";
+		String password = jdbcTemplate.queryForObject(sqlPsw, String.class);
+		return password;
+	}
 	
 }
