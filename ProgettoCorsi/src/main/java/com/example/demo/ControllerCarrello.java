@@ -28,28 +28,27 @@ public class ControllerCarrello {
 		 */
 		HttpSession session = req.getSession();
 		String id_utente = session.getAttribute("id").toString();
-		System.out.println("CORSI NUOVI: " + gc.getLinkCorsi(id_utente));
 		modelmap.put("corsi", gc.getLinkCorsi(id_utente));
 		return "Utenti/Carrello";
 	}
 	
-	/*
-	@RequestMapping("/inserisciNelCarrello")
+	
+	@RequestMapping("/Utenti/inserisciNelCarrello")
 	public String iscrizione(HttpServletRequest req,ModelMap modelmap) {
 		HttpSession session = req.getSession();
 		String id_utente = session.getAttribute("id").toString();
 		String nome_corso = req.getParameter("corso");
 
-		gc.acquistaCorso(id_utente, nome_corso);
 
-		
+		//gc.acquistaCorso(id_utente, nome_corso);
+
+		modelmap.put("corsoAcquistato", "Complimenti! Hai acquistato il corso: \"" +  nome_corso +"\"" );
 		 // aggiunge nome_corso al carrello dell'utente id_utente e al 
 		  //db iscritto
-		 
-		gc.acquistaCorso(id_utente,nome_corso);
 		
+		//return "Utenti/Carrello";
 		return carrello(req, modelmap);
-	}*/
+	}
 	
 	
 	

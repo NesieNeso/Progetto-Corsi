@@ -16,5 +16,9 @@
 		<div style="color:black;text-align:center">
   			<h1 style="font-family:verdana;font-size:20px ;"> ${corsi} </h1> </br>
 		</div>
+		<div style="color:red;text-align:center">
+  			<h1 style="font-family:verdana;font-size:20px ;"> ${corsoAcquistato} </h1> </br>
+		</div>
+		
 </body>
 </html>
