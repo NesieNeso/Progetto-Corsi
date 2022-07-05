@@ -41,7 +41,7 @@ public class ControllerCarrello {
 		 * aggiunge nome_corso al carrello dell'utente id_utente e al 
 		 * db iscritto
 		 */
-		gc.acquistaCorso(id_utente,nome_corso);
+		gc.acquistaCorso(id_utente, nome_corso);
 		return carrello(req, modelmap);
 	}
 	
