@@ -1,3 +1,8 @@
+insert into localizzazione (locale) values ('ita');
+insert into localizzazione (locale) values ('usa');
+insert into localizzazione (locale) values ('uk');
+insert into localizzazione (locale) values ('ch');
+
 Insert INTO utenti (nome, cognome, username, password, email) VALUES ('Gioele', 'Cufaj', 'JG', 'password', 'jg@gmail.com');
 Insert INTO utenti (nome, cognome, username, password, email) VALUES ('Stefano', 'Toneatto', 'TS', 'password', 'ts@libero.com');
 Insert INTO utenti (nome, cognome, username, password, email) VALUES ('Matteo', 'DallArco', 'DAM', 'password', 'dam@gmail.com');
@@ -21,3 +26,8 @@ insert into iscritto (id_corso, id_utente) values (2, 1);
 
 Insert INTO utenti (nome, cognome, username, password, email) VALUES ('Luigi', 'Rossi', 'RL', 'password', 'ban@gmail.com');
 Insert INTO ruolo (idutente, tipo_ruolo) VALUES (6, 'ban');
+
+insert into costo (euro) values (1);
+insert into costo (euro, sconto) values (50, 10);
+
+insert into carrello (id_utente, id_corso, id_costo, dataora) values (1,1,1,'2022-07-12 15:27:33');

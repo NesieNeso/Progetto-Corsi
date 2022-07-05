@@ -1,3 +1,11 @@
+drop table carrello;
+drop table costo;
+drop table iscritto;
+drop table corsi;
+drop table ruolo;
+drop table utenti;
+drop table localizzazione;
+
 create table localizzazione (
 	id_locale int(11) primary key auto_increment,
     locale varchar(3) not null
@@ -10,7 +18,7 @@ CREATE TABLE `utenti` (
   `cognome` varchar(35) DEFAULT NULL,
   `password` varchar(556) DEFAULT NULL,
   `email` varchar(35) DEFAULT NULL unique,
-  id_locale int(11) not null default 0,
+  id_locale int(11) not null default 1,
   foreign key(id_locale) references localizzazione(id_locale),
   PRIMARY KEY(`idUtente`)
 );
@@ -42,7 +50,7 @@ create table iscritto (
 create table costo (
 	id_costo int(11) primary key auto_increment,
     euro int(11) not null,
-    sconto int(3) not null
+    sconto int(3) not null default 0
 );
 
 create table carrello (
