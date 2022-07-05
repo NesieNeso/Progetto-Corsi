@@ -1,3 +1,8 @@
+create table localizzazione (
+	id_locale int(11) primary key auto_increment,
+    locale varchar(3) not null
+);
+
 CREATE TABLE `utenti` (
   `idUtente` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(35) DEFAULT NULL,
@@ -34,6 +39,12 @@ create table iscritto (
     foreign key(id_utente) references utenti(idUtente)
 );
 
+create table costo (
+	id_costo int(11) primary key auto_increment,
+    euro int(11) not null,
+    sconto int(3) not null
+);
+
 create table carrello (
 	id_utente int(11) not null,
     id_corso int(11) not null,
@@ -43,15 +54,4 @@ create table carrello (
     foreign key(id_corso) references corsi(id_corso),
     foreign key(id_utente) references utenti(idUtente),
     foreign key(id_costo) references costo(id_costo)
-);
-
-create table costo (
-	id_costo int(11) primary key auto_increment,
-    euro int(11) not null,
-    sconto int(3) not null
-);
-
-create table localizzazione (
-	id_locale int(11) primary key auto_increment,
-    locale varchar(3) not null
 );
