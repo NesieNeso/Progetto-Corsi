@@ -34,7 +34,7 @@ create table iscritto (
     foreign key(id_utente) references utenti(idUtente)
 );
 
-create table carello (
+create table carrello (
 	id_utente int(11) not null,
     id_corso int(11) not null,
     id_costo int(11) not null,
