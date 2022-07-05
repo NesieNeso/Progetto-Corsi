@@ -18,15 +18,22 @@
 		<div style="color:black;text-align:center">
   		<h1 style="font-family:verdana;font-size:20px ;"> ${corsi} </h1> </br>
 		</div>
+		
+		<div style="color:black;text-align:left">
+			<h1 style="font-family:verdana;font-size:20px ;"> <a href=/Utenti/Carrello>Carrello</a><br> </h1> </br>
+		</div>
+		
+		<!--  
 		<div style="color:black;text-align:left">
 			<h1 style="font-family:verdana;font-size:20px ;"> Clicca per iscriverti ad un nuovo corso: </h1>
 		</div>
 		<div style="color:black;text-align:center">
 			<h1 style="font-family:verdana;font-size:20px ;"> ${corsiNuovi} </h1> </br>
 			<form method="post" action="redirector"> 
-					<div class= "error"> ${errorInsertion} </div><br>
+		<div class= "error"> ${errorInsertion} </div><br>
 				</form>
 		</div>
+		-->
 
 </body>
 </html>
