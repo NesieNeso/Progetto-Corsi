@@ -53,15 +53,18 @@ public class GestisciUtenti {
 	
 	public List<String> getIscrizioneCorso(String email, String password) {
 		List<String> idList = new ArrayList<>();
-		List<String> idCorso = new ArrayList<>();
 		//recupero l'idUtente avendo email e password
 		idList.addAll(jdbcTemplate.queryForList("SELECT idUtente from utenti where email='" + email + "' and password='" + password+"'", String.class));
-		
-		if(idList.get(0).equals("0")) {
+		return getIscrizioneCorso(idList.get(0));
+	}
+	
+	public List<String> getIscrizioneCorso(String id) {
+		List<String> idCorso = new ArrayList<>();
+		if(id.equals("0")) {
 			
 		}else
 			//se trovo un utente recupero gli id_corso a cui è iscritto l'utente considerato
-			idCorso.addAll(jdbcTemplate.queryForList("SELECT id_corso from iscritto where id_utente = '"+idList.get(0) +"'", String.class));
+			idCorso.addAll(jdbcTemplate.queryForList("SELECT id_corso from iscritto where id_utente = '"+id +"'", String.class));
 		List<String> listCorsi = new ArrayList<>();
 		
 		//ciclo sugli id_corso per recuperare i nomi corrispondenti

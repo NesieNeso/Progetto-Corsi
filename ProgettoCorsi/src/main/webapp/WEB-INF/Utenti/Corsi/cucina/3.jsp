@@ -22,9 +22,9 @@
 	</div>
 	<div class ="links">
 	
-	<a class="link bntnext"  href="/nextPage?pagina=2"> < </a>
+	<a class="link bntnext"  href="/Utenti/Corsi/nextPage?pagina=2"> < </a>
 	<div class="page"> Pagina: 3</div>
-	<a  class="link bntnext noclick" href="/nextPage?pagina=3">></a>  
+	<a  class="link bntnext noclick" href="/Utenti/Corsi/nextPage?pagina=3">></a>  
 	</div>   
 </body>
 </html>

@@ -22,9 +22,9 @@
 		finestra, e il cielo fosco (si sentivano
 	</div>
 	<div class ="links">
-		<a class="link bntnext"  href="/nextPage?pagina=1"><</a>
+		<a class="link bntnext"  href="/Utenti/Corsi/nextPage?pagina=1"><</a>
 		<div class="page"> Pagina: 2</div>
-		<a  class="link bntnext" href="/nextPage?pagina=3">></a>     
+		<a  class="link bntnext" href="/Utenti/Corsi/nextPage?pagina=3">></a>     
 	</div>
 </body>
 </html>
