@@ -5,7 +5,9 @@ CREATE TABLE `utenti` (
   `cognome` varchar(35) DEFAULT NULL,
   `password` varchar(556) DEFAULT NULL,
   `email` varchar(35) DEFAULT NULL unique,
-  PRIMARY KEY (`idUtente`)
+  id_locale int(11) not null default 0,
+  foreign key(id_locale) references localizzazione(id_locale),
+  PRIMARY KEY(`idUtente`)
 );
 
 CREATE TABLE ruolo (
@@ -28,6 +30,28 @@ create table iscritto (
     id_utente int(11) not null,
     pagina_attuale int(11) not null default 0,
     primary key(id_corso, id_utente),
-    foreign key (id_corso) references corsi(id_corso),
-    foreign key (id_utente) references utenti(idUtente)
+    foreign key(id_corso) references corsi(id_corso),
+    foreign key(id_utente) references utenti(idUtente)
+);
+
+create table carello (
+	id_utente int(11) not null,
+    id_corso int(11) not null,
+    id_costo int(11) not null,
+    dataora timestamp not null,
+    primary key(id_utente, id_corso),
+    foreign key(id_corso) references corsi(id_corso),
+    foreign key(id_utente) references utenti(idUtente),
+    foreign key(id_costo) references costo(id_costo)
+);
+
+create table costo (
+	id_costo int(11) primary key auto_increment,
+    euro int(11) not null,
+    sconto int(3) not null
+);
+
+create table localizzazione (
+	id_locale int(11) primary key auto_increment,
+    locale varchar(3) not null
 );
