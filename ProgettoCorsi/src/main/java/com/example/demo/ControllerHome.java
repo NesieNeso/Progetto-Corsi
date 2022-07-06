@@ -48,7 +48,18 @@ public class ControllerHome {
 	public String getHomepage(HttpServletRequest request) {
 		System.out.println("Pagina iniziale");
 		
-		
+		/**
+		 * 
+		 * 
+		 * 
+		 */
+		GestisciCarrello gs = new GestisciCarrello(jdbcTemplate);
+		System.out.println(gs.getCostoScontato("uncinetto"));
+		/**
+		 * 
+		 * 
+		 * 
+		 */
 		errorString =  new ArrayList<String>();
 		aCAC = new AnnotationConfigApplicationContext();
 		aCAC.register(configuraBean.class);

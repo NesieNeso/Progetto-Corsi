@@ -28,7 +28,7 @@ public class ControllerCarrello {
 		 */
 		HttpSession session = req.getSession();
 		String id_utente = session.getAttribute("id").toString();
-		modelmap.put("corsi", gc.getLinkCorsi(id_utente));
+		modelmap.put("corsi", gc.getLinkCorsi(id_utente, false));
 		return "Utenti/Carrello";
 	}
 	
