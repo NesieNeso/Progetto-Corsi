@@ -8,22 +8,60 @@
 <title>Pagina Homepage</title>
 </head>
 <body>
+	<div  style="background:${color};text-align:center;height:50px;width:100%">  </div>
 	<div id = centrer>
 		<div id=centerCenter>
 			<div id = "Login">
-				<h1> Ciao  </h1>
-				<h3> Corsi  Italiani Assolutamente Ottimi</h3>
-				<form method="post" action="redirector"> 
-					<input id = "email" name="email" type = "email"  placeholder="email"> <br>
-					<div class= "error"> ${errorEmail} </div><br>
-					<input id = "pass" name="password" type = "password" placeholder="Password"> <br>
-					<div class= "error"> ${errorPass} </div><br>
-					
-					<input id="log" name ="bnt" type = "submit" value="Login">
-					<input id= "reg" name ="bnt" type = "submit" value="Registrati">
-					<div class ="error"> ${errorLogin} </div>
-				</form>
+				<h1> Gis</h1>
+				<h3> ${testoTitolo}</h3>
 				
+				<form style="display:${visible}" method="post" action="login"> 
+					<input id = "email" name="email" type = "email"  placeholder="${inputEmail}"> <br>
+					<div class= "error"> ${errorEmail} </div><br>
+					<input id = "pass" name="password" type = "password" placeholder="${inputPassword}"> <br>
+					<div class= "error"> ${errorPass} </div><br>
+					<input id="log" class="bntconfig" name ="bnt" type = "submit" value="${bntLogin}">
+				</form>
+			
+
+				<form style="display:${invisible}"  method="post" action="registrazione">
+					<input id = "email" name="email" type = "email"  placeholder="${inputEmail}"> <br>
+					<div class= "error"> ${errorEmail} </div><br>
+					<input id = "pass" name="password" type = "password" placeholder="${inputPassword}"> <br>
+					<div class= "error"> ${errorPass} </div><br>
+				
+					<div style="display:${invisible}">
+						<input id = "nome" name="nome" type = "text"  placeholder="${inputNome}"> <br>
+						<div class= "error"> ${errorEmail} </div><br>
+						<input id = "cognome" name="cognome" type = "text" placeholder="${inputCognome}"> <br>
+						<div class= "error"> ${errorPass} </div><br>
+					</div>
+					
+					
+					<input id= "reg" class="bntconfig" name ="bnt" type = "submit" value="${bntRegist}">
+					
+				</form>
+
+				<div class ="error"> ${errorLogin} </div>
+				
+				
+				<div id="formBean">
+					<div>
+						<form class="bean" method="post" action="changeLing"> 
+							<label> ${lingua} </label> <br>
+							<input class="bntconfig" name ="bnt" type = "submit" value="${bntLingua}"> 
+						 </form>
+						
+						<form class="bean" method="post" action="changeColor"> 
+							<label> ${stile} </label> <br>
+							<input class="bntconfig" name ="bnt" type = "submit" value="${bntColore}">  
+						</form>
+					</div>
+					<form   method="post" action="strReg"> 
+						<input style="${bntshadow}" class="bntconfig"  id= "StartRegLog" name ="bnt" type = "submit" value="${bntRegiNo}">
+					</form>
+				</div>
+				  
 			</div>
 		</div>
 	</div>

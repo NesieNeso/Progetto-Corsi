@@ -41,11 +41,7 @@ public class ControllerCarrello {
 		String nome_corso = req.getParameter("corso");
 
 		modelmap.put("corsoAcquistato", "Complimenti! Hai acquistato il corso: \"" +  nome_corso +"\"" );
-
-		 // aggiunge nome_corso al carrello dell'utente id_utente e al 
-		  //db iscritto		 
 		gc.acquistaCorso(id_utente, nome_corso);
-
 		return carrello(req, modelmap);
 	}
 	
